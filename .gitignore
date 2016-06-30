@@ -1,0 +1,14 @@
+.idea/
+bin/
+node_modules/
+target/
+*.iml
+*.log
+*.war
+build/
+.settings/
+.classpath
+.project
+.metadata/
+Servers/
+
