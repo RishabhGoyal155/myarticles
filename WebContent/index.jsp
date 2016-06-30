@@ -1,4 +1,4 @@
-<%@page import="java.sql.*,connect.*"%>
+<%@page import="java.sql.*,com.work.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ function clearText(field)
             <ul>
                   <li><a  class="current">Author?</a></li>
                   <li><a href="login.html">Login</a></li>
-                  <li><a href="signin.html">Signin</a></li>
+                  <li><a href="signin.html">Sign UP</a></li>
             </ul>    	
 		</div> <!-- end of menu -->
     

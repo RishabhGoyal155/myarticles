@@ -49,7 +49,7 @@ String site = new String("details.jsp");
 
 Class.forName("com.mysql.jdbc.Driver");
 Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/myarticles",
-		"root","password");
+		"root","mysql");
 Statement st=c.createStatement();
 ResultSet rs=st.executeQuery("select * from user where id = '"+id+"'");
 if(rs.next()) 

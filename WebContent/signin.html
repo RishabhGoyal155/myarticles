@@ -23,7 +23,7 @@ function clearText(field)
             <ul>
                   <li><a  class="current">Author?</a></li>
                   <li><a href="login.html">Login..</a></li>
-                  <li><a href="signin.html">Signin..</a></li>
+                  <li><a href="signin.html">SignUp..</a></li>
             </ul>    	
 		</div> <!-- end of menu -->
     
@@ -37,7 +37,7 @@ function clearText(field)
     	<div id="column_w530">	
             <div class="header_02">Register</div>
              <br><br>
-             <form action="signin.jsp" method="post" name="signin" >
+             <form action="SignUpServlet" method="post" name="signin" >
      <br>
              <table>
              <tr>
@@ -62,11 +62,6 @@ function clearText(field)
       <td align="left" rowspan="2" colspan="4"><input type="text" required="required" name="about" /></td>
     </tr>
   </table>
-   <br>        I am:<br>
-  <label>
-    <input type="radio" value="1" name="author" />Author</label>
-  <label>
-    <input type="radio" value="0" name="author" />Admin</label>
   <br><br>
  <center><button type="submit">Register!</button></center><br> <p align="right"><a href=#>Forget password?</a></p>
 </form>

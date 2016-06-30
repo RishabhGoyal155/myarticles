@@ -47,12 +47,14 @@ String about=request.getParameter("about");
 int x=Integer.parseInt(request.getParameter("author"));
 Class.forName("com.mysql.jdbc.Driver");
 Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/myarticles",
-		"root","password");
+		"root","mysql");
 Statement st=c.createStatement();
 ResultSet rs;
+String sqlInsertQuery = "INSERT INTO USER VALUES('"+id+"','"+name+"','"+email+
+"','"+password+"','"+about+"','"+x+"')";
+System.out.println(sqlInsertQuery);
 
-int i=st.executeUpdate("INSERT INTO USER VALUES('"+id+"','"+name+"','"+email+
-		"','"+password+"','"+about+"','"+x+"')");
+int i=st.executeUpdate(sqlInsertQuery);
 %>
 
    	<div id="column_w530">	
