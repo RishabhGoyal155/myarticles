@@ -1,5 +1,7 @@
 package com.article.servlet;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 
 import javax.servlet.RequestDispatcher;
@@ -12,46 +14,38 @@ import javax.servlet.http.HttpSession;
 
 import com.article.connect.JDBCConnect;
 
-/**
- * Servlet implementation class SignUpServlet
- */
-@WebServlet("/SignUpServlet")
-public class SignUpServlet extends HttpServlet {
+@WebServlet("/AddCategoryServlet")
+public class AddCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SignUpServlet() {
+    public AddCategoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+    	//HttpSession session = request.getSession();
+    	PrintWriter out = response.getWriter();
 		String id=request.getParameter("id");
-		session.setAttribute("id", id);
 		String name=request.getParameter("name");
-		String email=request.getParameter("email");
-		String password=request.getParameter("password");
-		String about=request.getParameter("about");
-	    int x=1;
 		Connection connection = JDBCConnect.getConnection();
 		Statement st;
 		try {
 			st = connection.createStatement();
 			//ResultSet rs;
-			String sqlInsertQuery = "INSERT INTO USER VALUES('"+id+"','"+name+"','"+email+
-			"','"+password+"','"+about+"','"+x+"')";
+			String sqlInsertQuery = "INSERT INTO category VALUES('"+id+"','"+name+"')";
 			System.out.println(sqlInsertQuery);
 			int i=st.executeUpdate(sqlInsertQuery);
 			System.out.println(i);
 			if(i==1){
-				RequestDispatcher rd=request.getRequestDispatcher("success.jsp");  
-	        rd.forward(request,response);
+				out.println("<script type=\"text/javascript\">");
+				   out.println("alert('Category Added Successfully.');");
+				   out.println("location='WelcomeAdmin.jsp';");
+				   out.println("</script>");
+				
+				//RequestDispatcher rd=request.getRequestDispatcher("success.jsp");  
+	             //rd.forward(request,response);
 	        }
 			else{
 				RequestDispatcher rd=request.getRequestDispatcher("error.jsp");  
@@ -64,5 +58,9 @@ public class SignUpServlet extends HttpServlet {
 		}
 		
 	}
+
+    
+    
+    
 
 }

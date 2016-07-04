@@ -1,4 +1,4 @@
-<%@page import="java.sql.*,connect.*"%>
+<%@page import="java.sql.*,com.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -71,7 +71,12 @@ out.print(content);
 %>        
 <p><br><br><br><br>Your article is submitted successfully.</p>  
  
-<br><br>
+
+<br><br> <br><br><br>         
+<form>
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;"> 
+</form>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>

@@ -10,6 +10,7 @@ function clearText(field)
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
+
 </script>
 
 </head>
@@ -37,7 +38,7 @@ function clearText(field)
             <div class="header_02">Login</div>
              <br><br><br><br>
              <center>
-             <form action="login.jsp" method="post" name="login" >
+             <form action="LoginServlet" method="post" name="login" >
 
  User id :
   <input type="text" required="required" name="id"><br><br><br>

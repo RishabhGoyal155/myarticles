@@ -1,11 +1,11 @@
-<%@page import="java.sql.*,connect.*"%>
+<%@page import="java.sql.*,com.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Login</title>
+<title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 function clearText(field)
@@ -14,7 +14,6 @@ function clearText(field)
     else if (field.value == '') field.value = field.defaultValue;
 }
 </script>
-
 </head>
 
 <body>
@@ -25,7 +24,9 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-                  <li><a href="logout.jsp">Logout..</a></li>
+                   <li><a  class="current">Author?</a></li>
+                  <li><a href="login.html">Login</a></li>
+                  <li><a href="signup.html">Sign UP</a></li>
             </ul>    	
       		
            </div> <!-- end of menu -->
@@ -33,53 +34,15 @@ function clearText(field)
     </div>  <!-- end of header -->
 	
 </div> <!-- end of header wrapper -->
-         <br><br><br>
-  
+         <br><br>
 <div id="content_wrapper">
 	<div id="content">
     
-    	<div id="column_w530">	
-            <div class="header_02">
-     <%@page import="java.sql.*,javax.sql.*" %>
-<%
-String id=request.getParameter("id");
-session.setAttribute("id", id);
-String password=request.getParameter("password");
-String site = new String("details.jsp");
-
-Class.forName("com.mysql.jdbc.Driver");
-Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/myarticles",
-		"root","mysql");
-Statement st=c.createStatement();
-ResultSet rs=st.executeQuery("select * from user where id = '"+id+"'");
-if(rs.next()) 
-{ 
-if(rs.getString(4).equals(password)) 
-{ 
-	out.println("Welcome "+id); 
-%>
-</div>
-<p class="em_text" style="font-size:20px"><br><br>Category: </p><br>
-<p style="font-size:20px"><a href="details.jsp" >Details</a></p><br>
-<p style="font-size:20px"><a href="article_written.jsp">Articles Written by you.</a></p><br>
-<p style="font-size:20px"><a href="try.jsp">Write new Article</a></p><br>
-
-<%	
-} 
-else 
-{ 
-out.println("Invalid password try again"); 
-%>
-</div>
-<a href="login.html">Login</a>
-<% 		
-} 
-} 
-else 
-%>
-</div>
-       
-  
+    <div id="column_w530">	
+          <div class="header_02">Registered</div>
+       <br><br>
+       <font size="4px">
+You have successfully registered.<br/>Now goto <a href="login.html">Login page.</a></font>
 <br><br>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           

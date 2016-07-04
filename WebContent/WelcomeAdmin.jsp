@@ -24,11 +24,9 @@ function clearText(field)
    		<div id="menu">
 		<!-- menu starts -->
       		<div id="menu_left"></div>
-             <ul>
-                  <li><a  class="current">Author?</a></li>
-                  <li><a href="login.html">Login..</a></li>
-                  <li><a href="signin.html">Signin..</a></li>
-            </ul>
+            <ul>
+                  <li><a href="logout.jsp">Logout..</a></li>
+            </ul>    	
       		
            </div> <!-- end of menu -->
          
@@ -36,18 +34,31 @@ function clearText(field)
 	
 </div> <!-- end of header wrapper -->
          <br><br><br>
+  
 <div id="content_wrapper">
 	<div id="content">
     
     	<div id="column_w530">	
-            <div class="header_02">Error</div>
-             <br><br>
+            <div class="header_02">Welcome 
+     <%@page import="java.sql.*,javax.sql.*" %>
+<%
+String id=(String)session.getAttribute("id");
+out.println(id);
+%>
+</div>
+<p style="font-size:20px"><a href="details.jsp" >Details</a></p><br>
+<p style="font-size:20px"><a href="WriteArticle.jsp">Add Article</a></p><br>
+<p style="font-size:20px"><a href="signup.html">Add Author</a></p><br>
+<p style="font-size:20px"><a href="AddCategory.html" >Add Category</a></p><br>
+<p style="font-size:20px"><a href="DeleteArticle.html">Delete article</a></p><br>
+<p style="font-size:20px"><a href="DeleteAuthor.html">Delete author</a></p><br>
+<p style="font-size:20px"><a href="DeleteCategory.html" >Delete Category</a></p><br>
+<p style="font-size:20px"><a href="ArticleList.jsp">See articles</a></p><br>
 
-<br><br><strong>
-
-Some Error has occured. Please try after some time . 
-<a href="index.jsp"> Home Page</a>
-</strong>
+</div>
+       
+  
+<br><br>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>
@@ -64,4 +75,4 @@ Some Error has occured. Please try after some time .
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
 	</div> <!-- end of footer --></body>
-</html> 
+</html>

@@ -1,4 +1,4 @@
-<%@page import="java.sql.*,connect.*"%>
+<%@page import="com.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -43,26 +43,50 @@ function clearText(field)
              <%@page import="java.sql.*,javax.sql.*" %>
 <%
 String id=(String)session.getAttribute("id");
+int i=1;
 //session.putValue("id", id);
 Class.forName("com.mysql.jdbc.Driver");
 Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/myarticles",
 		"root","password");
 Statement st=c.createStatement();
-ResultSet rs=st.executeQuery("select name from article where author_id = '"+id+"'");
+String sqlSelectQuery = "select author from user where id = '"+id+"'";
+String sqlSelectQuery1 = "select name from article where author_id = '"+id+"'";
+String sqlSelectQuery2 = "select name from article order by name";
+ResultSet rs1=st.executeQuery(sqlSelectQuery);
+if(rs1.next()) {
+	rs1.beforeFirst();
+    i=rs1.getInt(1);
+	}
+if(i==1){
+ResultSet rs=st.executeQuery(sqlSelectQuery1);
 if(!rs.next()) {
-    out.println("Sorry, could not find your details. " +
-    "Please <A HREF='login.html'> Login Again</A>.");
+    out.println("You have not written any article yet.");
 } else {
 	rs.beforeFirst();
-	/*int i=0;
-	for(i=0;i<a;i++){*/
 		while(rs.next()){
 %>
 
 <%= rs.getString(1) %><br>
 <%
- }}
-%>           
+ }}}
+else{
+	
+	ResultSet rs=st.executeQuery(sqlSelectQuery2);
+	if(!rs.next()) {
+	    out.println("You have not written any article yet.");
+	} else {
+		rs.beforeFirst();
+			while(rs.next()){
+	%>
+
+	<%= rs.getString(1) %><br>
+	<%
+	 }}}
+%> <br><br> <br><br><br>         
+<form>
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;"> 
+</form>
 <br><br>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           

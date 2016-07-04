@@ -1,7 +1,3 @@
-
-<%@page import="java.sql.*,connect.*"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +11,6 @@ function clearText(field)
     else if (field.value == '') field.value = field.defaultValue;
 }
 </script>
-
 </head>
 
 <body>
@@ -26,49 +21,32 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-                  <li><a  class="current">Author?</a></li>
-                  <li><a href="login.html">Login..</a></li>
-                  <li><a href="signin.html">Signin..</a></li>
+              <li><a href="login.html">Logout..</a></li>
             </ul>    	
 		</div> <!-- end of menu -->
+    
     </div>  <!-- end of header -->
-	</div> <!-- end of header wrapper -->
+	
+</div> <!-- end of header wrapper -->
        <br><br><br>
 <div id="content_wrapper">
 	<div id="content">
     
     	<div id="column_w530">	
-            <div class="header_02">New Article</div>
- <%String id=(String)session.getAttribute("id");
- %>          
-       <form action="write_new.jsp" method="post" name="article" >
-               <table>
-             <tr height="50">
-      <td align="right">Heading:</td>
+            <div class="header_02">Delete Author</div>
+             <br><br>
+             <form action="DeleteAuthorServlet" method="post" name="DeleteAuthor" >
+     <br> <br><br>
+             <table>
+    <tr>
+      <td align="right">Author id or name:</td>
       <td align="left"><input type="text" required="required" name="name" /></td>
     </tr>
-    <tr height="50">
-      <td align="right">Article id:</td>
-      <td align="left"><input type="text" required="required" name="id" /></td>
-    </tr>
-     <tr height="50">
-      <td align="right">Author id:</td>
-      <td align="left"><input type="text" required="required" name="author_id" /></td>
-    </tr>
-    
-    <tr height="50" >
-      <td align="right" rowspan="10" >Content:</td>
-    <td align="left" colspan="5" rowspan="5">
-    <input height="100" width="100" type="text" required="required" name="content" />
-    </td>
-    </tr>
-  </table>
-  
-<center> <button  type="submit">Save & Submit!</button></center>
- <br> 
+    </table>
+  <br><br> <br><br>
+ <center><button type="submit">Delete</button></center><br> 
 </form>
-    
-           
+      
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>
@@ -81,7 +59,7 @@ function clearText(field)
     <div id="footer">
           
         <div class="margin_bottom_20"></div>
-        Copyright Reserved © <a href="index.jsp">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
+        Copyright Reserved Â© <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
 	</div> <!-- end of footer --></body>

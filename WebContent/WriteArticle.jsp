@@ -24,30 +24,55 @@ function clearText(field)
    		<div id="menu">
 		<!-- menu starts -->
       		<div id="menu_left"></div>
-             <ul>
+            <ul>
                   <li><a  class="current">Author?</a></li>
                   <li><a href="login.html">Login..</a></li>
                   <li><a href="signin.html">Signin..</a></li>
-            </ul>
-      		
-           </div> <!-- end of menu -->
-         
+            </ul>    	
+		</div> <!-- end of menu -->
     </div>  <!-- end of header -->
-	
-</div> <!-- end of header wrapper -->
-         <br><br><br>
+	</div> <!-- end of header wrapper -->
+       <br><br><br>
 <div id="content_wrapper">
 	<div id="content">
     
     	<div id="column_w530">	
-            <div class="header_02">Error</div>
-             <br><br>
+            <div class="header_02">New Article</div>
+ <%String id=(String)session.getAttribute("id");
+ %>          
+       <form action="write_new.jsp" method="post" name="article" >
+               <table>
+             <tr height="50">
+      <td align="right">Heading:</td>
+      <td align="left"><input type="text" required="required" name="name" /></td>
+    </tr>
+    <tr height="50">
+      <td align="right">Article id:</td>
+      <td align="left"><input type="text" required="required" name="id" /></td>
+    </tr>
+     <tr height="50">
+      <td align="right">Author id:</td>
+      <td align="left"><input type="text" required="required" name="author_id" /></td>
+    </tr>
+    
+    <tr height="50" >
+      <td align="right" rowspan="10" >Content:</td>
+    <td align="left" colspan="5" rowspan="5">
+    <input height="100" width="100" type="text" required="required" name="content" />
+    </td>
+    </tr>
+  </table>
+  
+<center> <button  type="submit">Save & Submit!</button></center>
 
-<br><br><strong>
-
-Some Error has occured. Please try after some time . 
-<a href="index.jsp"> Home Page</a>
-</strong>
+</form>
+<form><center><br><br>
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;"> </center>
+</form>
+<br><br>
+    
+           
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>
@@ -60,8 +85,8 @@ Some Error has occured. Please try after some time .
     <div id="footer">
           
         <div class="margin_bottom_20"></div>
-        Copyright Reserved © <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
+        Copyright Reserved © <a href="index.jsp">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
 	</div> <!-- end of footer --></body>
-</html> 
+</html>
