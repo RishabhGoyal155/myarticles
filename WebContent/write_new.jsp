@@ -40,7 +40,7 @@ function clearText(field)
  <%@page import="java.sql.*,javax.sql.*" %>
 <%
 String name=request.getParameter("name");
-session.putValue("name", name);
+//session.putValue("name", name);
 String author_id=(String)session.getAttribute("id");
 String id=request.getParameter("id");
 String content=request.getParameter("content");

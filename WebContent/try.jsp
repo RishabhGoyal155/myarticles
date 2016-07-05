@@ -99,10 +99,10 @@ function clearText(field)
   
   
   
-<center><br> <button  type="submit">Save & Submit!</button></center>
+<center> <button  type="submit">Save & Submit!</button></center>
 
 </form>
-<form><center><br>
+<form><center><br><br>
 <input type="button" value="Back" 
  onClick="history.go(-1);return true;"> </center>
 </form>
