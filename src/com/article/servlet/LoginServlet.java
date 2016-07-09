@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.article.connect.JDBCConnect;
+import com.article.entity.User;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -22,7 +23,26 @@ public class LoginServlet extends HttpServlet {
     }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String id=request.getParameter("id");
+		
+		User user=new User();
+		user.setId(request.getParameter("id"));
+		user.setPassword(request.getParameter("password"));
+		PrintWriter out=response.getWriter();
+		RequestDispatcher rd;
+		boolean status=DAO.validate(user);  
+		if(status){  
+			rd=request.getRequestDispatcher("welcome.jsp");
+			 rd.forward(request,response);
+		}  
+		else  
+		{  
+			out.println("<script type=\"text/javascript\">");
+			   out.println("alert('User or password incorrect');");
+			   out.println("location='login.html';");
+			   out.println("</script>");
+		}
+		
+		/*String id=request.getParameter("id");
 		session.setAttribute("id", id);
 		String password=request.getParameter("password");
 		PrintWriter out = response.getWriter();
@@ -31,19 +51,19 @@ public class LoginServlet extends HttpServlet {
 		try {
 		st = connection.createStatement();
 		String sqlSelectQuery = "select author from user where id = '"+id+"' and password='"+password+"'";
-			System.out.println(sqlSelectQuery);
 			ResultSet i=st.executeQuery(sqlSelectQuery);
 			int s;
-			System.out.println(i);
+			RequestDispatcher rd;
 			if(i.next()){
 				s=i.getInt(1);
 				if(s==1){
-			 RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");  
-			 rd.forward(request,response);}
-				else{
-					 RequestDispatcher rd=request.getRequestDispatcher("WelcomeAdmin.jsp");  
-					 rd.forward(request,response);
+			 rd=request.getRequestDispatcher("welcome.jsp");  
+			 }
+				else {
+		      rd=request.getRequestDispatcher("welcomeAdmin.jsp");  
+					
 				}
+				 rd.forward(request,response);
 			}
 			else
 			{
@@ -52,16 +72,13 @@ public class LoginServlet extends HttpServlet {
 				   out.println("alert('User or password incorrect');");
 				   out.println("location='login.html';");
 				   out.println("</script>");
-		       // RequestDispatcher rd=request.getRequestDispatcher("login.html");  
-		        //rd.include(request,response);  
-				
-			}
-				
+		    }
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 	}
 
 }

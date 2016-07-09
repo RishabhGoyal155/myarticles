@@ -1,3 +1,6 @@
+<%@page import="java.sql.*,com.article.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +14,7 @@ function clearText(field)
     else if (field.value == '') field.value = field.defaultValue;
 }
 </script>
+
 </head>
 
 <body>
@@ -21,32 +25,40 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-              <li><a href="login.html">Logout..</a></li>
+                  <li><a href="logout.jsp">Logout..</a></li>
             </ul>    	
-		</div> <!-- end of menu -->
-    
+      		
+           </div> <!-- end of menu -->
+         
     </div>  <!-- end of header -->
 	
 </div> <!-- end of header wrapper -->
-       <br><br><br>
+         <br><br><br>
+  
 <div id="content_wrapper">
 	<div id="content">
     
     	<div id="column_w530">	
-            <div class="header_02">Delete Author</div>
-             <br><br>
-             <form action="DeleteAuthorServlet" method="post" name="DeleteAuthor" >
-     <br> <br><br>
-             <table>
-    <tr>
-      <td align="right">Author id or name:</td>
-      <td align="left"><input type="text" required="required" name="name" /></td>
-    </tr>
-    </table>
-  <br><br> <br><br>
- <center><button type="submit">Delete</button></center><br> 
-</form>
-      
+            <div class="header_02">Welcome 
+     <%@page import="java.sql.*,javax.sql.*" %>
+<%
+String id=(String)session.getAttribute("id");
+out.println(id);
+%>
+</div>
+<p style="font-size:20px"><a href="details.jsp" >Details</a></p><br>
+<p style="font-size:20px"><a href="writeArticle.jsp">Add Article</a></p><br>
+<p style="font-size:20px"><a href="signup.html">Add Author</a></p><br>
+<p style="font-size:20px"><a href="addCategory.html" >Add Category</a></p><br>
+<p style="font-size:20px"><a href="deleteArticle.html">Delete article</a></p><br>
+<p style="font-size:20px"><a href="deleteAuthor.html">Delete author</a></p><br>
+<p style="font-size:20px"><a href="deleteCategory.html" >Delete Category</a></p><br>
+<p style="font-size:20px"><a href="articleList.jsp">See articles</a></p><br>
+
+</div>
+       
+  
+<br><br>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>
@@ -59,7 +71,7 @@ function clearText(field)
     <div id="footer">
           
         <div class="margin_bottom_20"></div>
-        Copyright Reserved Â© <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
+        Copyright Reserved © <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
 	</div> <!-- end of footer --></body>

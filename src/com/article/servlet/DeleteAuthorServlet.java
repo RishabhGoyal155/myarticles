@@ -42,9 +42,7 @@ public class DeleteAuthorServlet extends HttpServlet {
 			st = connection.createStatement();
 			//;
 			String sqlDeleteQuery = "delete from user where name = '"+name+"' or id = '"+name+"'";
-			System.out.println(sqlDeleteQuery);
 			int i=st.executeUpdate(sqlDeleteQuery);
-			System.out.println(i);
 			out.println("<script type=\"text/javascript\">");
 			if(i==1){
 				
@@ -54,7 +52,7 @@ public class DeleteAuthorServlet extends HttpServlet {
 				   out.println("alert('No such Author exists!!');");
 			}
 			
-			   out.println("location='WelcomeAdmin.jsp';");
+			   out.println("location='welcomeAdmin.jsp';");
 			   out.println("</script>");
 			
 			

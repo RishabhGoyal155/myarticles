@@ -32,17 +32,13 @@ public class DeleteArticleServlet extends HttpServlet {
 			st = connection.createStatement();
 			//;
 			String sqlDeleteQuery = "delete from article where name = '"+name+"'";
-			System.out.println(sqlDeleteQuery);
 			int i=st.executeUpdate(sqlDeleteQuery);
-			System.out.println(i);
 			if(i==1){
 				out.println("<script type=\"text/javascript\">");
 				   out.println("alert('Article Deleted Successfully.');");
-				   out.println("location='WelcomeAdmin.jsp';");
+				   out.println("location='welcomeAdmin.jsp';");
 				   out.println("</script>");
 				
-				//RequestDispatcher rd=request.getRequestDispatcher("success.jsp");  
-	             //rd.forward(request,response);
 	        }
 			else{
 				out.println("<script type=\"text/javascript\">");

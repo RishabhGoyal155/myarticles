@@ -31,9 +31,7 @@ public class DeleteCategoryServlet extends HttpServlet {
 			st = connection.createStatement();
 			//;
 			String sqlDeleteQuery = "delete from category where name = '"+name+"' or id = '"+name+"'";
-			System.out.println(sqlDeleteQuery);
 			int i=st.executeUpdate(sqlDeleteQuery);
-			System.out.println(i);
 			out.println("<script type=\"text/javascript\">");
 			if(i==1){
 				   out.println("alert('Category Deleted Successfully.');");
@@ -41,7 +39,7 @@ public class DeleteCategoryServlet extends HttpServlet {
 			else{
 				   out.println("alert('No such Category exists!!');");
 			}
-			   out.println("location='WelcomeAdmin.jsp';");
+			   out.println("location='welcomeAdmin.jsp';");
 			   out.println("</script>");
 			
 		} catch (SQLException e) {

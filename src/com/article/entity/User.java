@@ -1,8 +1,14 @@
+package com.article.entity;
 //User pojo
 public class User {
-String id,name,email,password,about;
-int x;
-public String getId() {
+private String id;
+private String name;
+private String email; 
+private String password;
+private String about;
+private Boolean isAdmin; 
+
+public  String getId() {
 	return id;
 }
 public void setId(String id) {
@@ -32,12 +38,11 @@ public String getAbout() {
 public void setAbout(String about) {
 	this.about = about;
 }
-public int getX() {
-	return x;
+public Boolean getIsAdmin() {
+	return isAdmin;
 }
-public void setX(int x) {
-	this.x = x;
+public void setIsAdmin(Boolean isAdmin) {
+	this.isAdmin = isAdmin;
 }
-
 
 }

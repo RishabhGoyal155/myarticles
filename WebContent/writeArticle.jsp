@@ -44,9 +44,7 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-                  <li><a  class="current">Author?</a></li>
-                  <li><a href="login.html">Login..</a></li>
-                  <li><a href="signin.html">Signin..</a></li>
+                  <li><a class="current" href="logout.jsp">Log Out..</a></li>
             </ul>    	
 		</div> <!-- end of menu -->
     </div>  <!-- end of header -->
@@ -59,7 +57,7 @@ function clearText(field)
             <div class="header_02">New Article</div>
  <%String id=(String)session.getAttribute("id");
  %>          
-       <form action="write_new.jsp" method="post" name="article" >
+       <form action="successArticle.jsp" method="post" name="article" >
                <table>
              <tr height="50">
       <td align="right">Heading:</td>

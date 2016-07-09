@@ -22,9 +22,8 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-                  <li><a  class="current">Author?</a></li>
-                  <li><a href="login.html">Log in..</a></li>
-                  <li><a href="signin.html">Sign up..</a></li>
+                  <li><a class="current" href="login.html">Log In..</a></li>
+                  <li><a href="signup.html">Sign Up..</a></li>
             </ul>    	
 		</div> <!-- end of menu -->
     </div>  <!-- end of header -->
@@ -32,7 +31,7 @@ function clearText(field)
        <br><br><br>
        <%
        session.invalidate();
-       response.sendRedirect("home.jsp");
+       response.sendRedirect("index.jsp");
 
        %>
 <div id="content_wrapper">

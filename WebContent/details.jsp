@@ -40,13 +40,11 @@ function clearText(field)
     	<div id="column_w530">	
             <div class="header_02">Details</div>
              <br><br>
-             <%@page import="java.sql.*,javax.sql.*" %>
+             <%@page import="java.sql.*,javax.sql.*,com.article.connect.*" %>
 <%
 String id=(String)session.getAttribute("id");
-Class.forName("com.mysql.jdbc.Driver");
-Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/myarticles",
-		"root","password");
-Statement st=c.createStatement();
+Connection con=JDBCConnect.getConnection(); 
+Statement st=con.createStatement();
 ResultSet rs=st.executeQuery("select * from user where id = '"+id+"'");
 if(!rs.next()) {
 	// New location to be redirected

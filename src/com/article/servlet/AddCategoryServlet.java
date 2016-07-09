@@ -35,17 +35,14 @@ public class AddCategoryServlet extends HttpServlet {
 			st = connection.createStatement();
 			//ResultSet rs;
 			String sqlInsertQuery = "INSERT INTO category VALUES('"+id+"','"+name+"')";
-			System.out.println(sqlInsertQuery);
+			
 			int i=st.executeUpdate(sqlInsertQuery);
-			System.out.println(i);
 			if(i==1){
 				out.println("<script type=\"text/javascript\">");
 				   out.println("alert('Category Added Successfully.');");
-				   out.println("location='WelcomeAdmin.jsp';");
+				   out.println("location='welcomeAdmin.jsp';");
 				   out.println("</script>");
 				
-				//RequestDispatcher rd=request.getRequestDispatcher("success.jsp");  
-	             //rd.forward(request,response);
 	        }
 			else{
 				RequestDispatcher rd=request.getRequestDispatcher("error.jsp");  

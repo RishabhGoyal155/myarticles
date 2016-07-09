@@ -8,6 +8,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <title>MY ARTICLE</title>
       <link href="style.css" rel="stylesheet" type="text/css" />
+      <link href="css/style1.css" rel="stylesheet" type="text/css" />
       <script type="text/javascript">
          function clearText(field)
          {
@@ -15,46 +16,6 @@
              else if (field.value == '') field.value = field.defaultValue;
          }
       </script>
-      <style>
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-</style>
    </head>
    <body>
       <div id="header_wrapper">
@@ -66,9 +27,8 @@
                <!-- menu starts -->
                <div id="menu_left"></div>
                <ul>
-                  <li><a  class="current">Author?</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="signup.html">Sign UP</a></li>
+               <li><a class="current" href="login.html">Log In </a></li>
+               <li><a href="signup.html">Sign UP</a></li>
                </ul>
             </div>
             <!-- end of menu -->
@@ -96,9 +56,7 @@
 	try {
 	st = connection.createStatement();
 	String sqlSelectQuery = "select name from category order by name";
-		System.out.println(sqlSelectQuery);
 		ResultSet i=st.executeQuery(sqlSelectQuery);
-		System.out.println(i);
 		if(i.next()){
 			i.beforeFirst();
 			while(i.next()){
@@ -106,10 +64,10 @@
     <a href="article.jsp" ><%= i.getString(1) %></a>
     <%
  }
-		}		
+		}
+		
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
  %>     

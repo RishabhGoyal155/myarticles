@@ -1,3 +1,4 @@
+<%@page import="java.sql.*,com.article.*,com.article.connect.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -12,62 +13,62 @@ function clearText(field)
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
-
 </script>
-
 </head>
 
 <body>
 <div id="header_wrapper">
   <div id="header">   
-   <a href="index.jsp"><div id="site_logo"></div></a>
+   	<a href="index.jsp"><div id="site_logo"></div></a>
    		<div id="menu">
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-                  
                   <li><a href="logout.jsp">Logout..</a></li>
             </ul>    	
-		</div> <!-- end of menu -->
+      		
+           </div> <!-- end of menu -->
+         
     </div>  <!-- end of header -->
-	</div> <!-- end of header wrapper -->
-       <br><br><br>
+	
+</div> <!-- end of header wrapper -->
+         <br><br>
 <div id="content_wrapper">
 	<div id="content">
     
-    	<div id="column_w530">	
-            <div class="header_02">Articles</div>
-             <br><br>
-             <%@page import="java.sql.*,java.io.*,com.article.*" %>
-             <%@page import="com.article.connect.JDBCConnect"%>
-             
-              <%
-    PrintWriter out1 = response.getWriter();
-	Connection connection = JDBCConnect.getConnection();
-	Statement st;
-	try {
-	st = connection.createStatement();
-	String sqlSelectQuery = "select name from article order by name";
-		System.out.println(sqlSelectQuery);
-		ResultSet i=st.executeQuery(sqlSelectQuery);
-		System.out.println(i);
-		if(i.next()){
-			i.beforeFirst();
-			while(i.next()){
- %>
-  <font size="5px"><a href="article.jsp"><%= i.getString(1) %></a></font><br><br>
-    <%
- }
-		}		
-		}
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
- %>     
-          <br><br>
-          
-           
+      
+ <%@page import="java.sql.*,javax.sql.*" %>
+<%
+String name=request.getParameter("name");
+//session.putValue("name", name);
+String author_id=(String)session.getAttribute("id");
+String id=request.getParameter("id");
+String content=request.getParameter("content");
+
+//Get the system date and time.
+java.util.Date utilDate = new java.util.Date();
+//Convert it to java.sql.Date
+java.sql.Date rdate = new java.sql.Date(utilDate.getTime());
+
+Connection c = JDBCConnect.getConnection();
+Statement st=c.createStatement();
+ResultSet rs;
+int i=st.executeUpdate("INSERT INTO article VALUES('"+name+"','"+id+
+		"','"+author_id+"','"+content+"','"+rdate+"')");
+
+if(i==1){
+	out.println("<script type=\"text/javascript\">");
+	   out.println("alert('Article is submitted.');");
+	   out.println("location='welcome.jsp';");
+	   out.println("</script>");
+	
+}
+else{
+	RequestDispatcher rd=request.getRequestDispatcher("error.jsp");  
+    rd.forward(request,response); 
+}
+
+%>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>

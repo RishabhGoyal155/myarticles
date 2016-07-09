@@ -27,7 +27,7 @@ function clearText(field)
              <ul>
                   <li><a  class="current">Author?</a></li>
                   <li><a href="login.html">Login..</a></li>
-                  <li><a href="signin.html">Signin..</a></li>
+                  <li><a href="signup.html">Sign Up..</a></li>
             </ul>
       		
            </div> <!-- end of menu -->

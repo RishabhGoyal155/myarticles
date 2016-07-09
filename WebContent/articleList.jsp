@@ -1,11 +1,10 @@
-<%@page import="java.sql.*,com.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Login</title>
+<title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 	function clearText(field) {
@@ -26,59 +25,63 @@
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
+
 					<li><a href="logout.jsp">Logout..</a></li>
 				</ul>
-
 			</div>
 			<!-- end of menu -->
-
 		</div>
 		<!-- end of header -->
-
 	</div>
 	<!-- end of header wrapper -->
 	<br>
 	<br>
 	<br>
-
 	<div id="content_wrapper">
 		<div id="content">
+
 			<div id="column_w530">
-				<div class="header_02">
-					Welcome
-					<%@page import="java.sql.*,javax.sql.*"%>
-					<%
-						String id = (String) session.getAttribute("id");
-						//String site = new String("details.jsp");
-						out.println(id);
-					%>
-				</div>
-				<p class="em_text" style="font-size: 20px">
-					<br> <br>Category:
-				</p>
+				<div class="header_02">Articles</div>
 				<br>
-				<p style="font-size: 20px">
-					<a href="details.jsp">Details</a>
-				</p>
 				<br>
-				<p style="font-size: 20px">
-					<a href="article_written.jsp">Articles Written by you.</a>
-				</p>
+				<%@page import="java.sql.*,java.io.*,com.article.*"%>
+				<%@page import="com.article.connect.JDBCConnect"%>
+
+				<%
+					PrintWriter out1 = response.getWriter();
+					Connection connection = JDBCConnect.getConnection();
+					Statement st;
+					try {
+						st = connection.createStatement();
+						String sqlSelectQuery = "select name from article order by name";
+						System.out.println(sqlSelectQuery);
+						ResultSet i = st.executeQuery(sqlSelectQuery);
+						System.out.println(i);
+						if (i.next()) {
+							i.beforeFirst();
+							while (i.next()) {
+				%>
+				<font size="5px"><a href="article.jsp"><%=i.getString(1)%></a></font><br>
 				<br>
-				<p style="font-size: 20px">
-					<a href="writeArticle.jsp">Write new Article</a>
-				</p>
+				<%
+					}
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				%>
 				<br>
+				<br>
+
+
+				<div class="margin_bottom_20"></div>
+				<div class="margin_bottom_20"></div>
+				<div class="cleaner"></div>
 			</div>
-			<br>
-			<br>
-			<div class="margin_bottom_20"></div>
-			<div class="margin_bottom_20"></div>
 			<div class="cleaner"></div>
 		</div>
-		<div class="cleaner"></div>
-	</div>
-	<!-- end of content wrapper -->
+		<!-- end of content wrapper -->
 	</div>
 	<!-- end of content wrapper -->
 
