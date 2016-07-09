@@ -65,7 +65,6 @@
     <%
  }
 		}
-		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +92,8 @@
                </ul>
                <div class="margin_bottom_20"></div>
                <div class="content_section_01">
-                  Our expert content is perfect for email newsletter publishers looking for content they can syndicate for the benefit of their members.We consist of a small, passionate team of humans that care about providing great service.
+                  Our expert content is perfect for email newsletter publishers looking for content they can syndicate for the benefit of their members.We consist of a small, 
+                  passionate team of humans that care about providing great service.
                </div>
                <div class="cleaner"></div>
             </div>

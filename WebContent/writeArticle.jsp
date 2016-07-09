@@ -13,27 +13,8 @@ function clearText(field)
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
+
 </script>
-
- <link href="css/multi-select.css" rel="stylesheet" type="text/css">
-    <link href="css/application.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-23068623-1']);
-      _gaq.push(['_setDomainName', '.loudev.com']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
-
-
-
 </head>
 
 <body>
@@ -67,7 +48,10 @@ function clearText(field)
       <td align="right">Article id:</td>
       <td align="left"><input type="text" required="required" name="id" /></td>
     </tr>
-    
+    <tr height="50">
+      <td align="right">Category:</td>
+      <td align="left"><select size="5px"></td>
+    </tr>
     <tr height="50" >
       <td align="right" rowspan="10" >Content:</td>
     <td align="left" colspan="5" rowspan="5">
@@ -75,26 +59,6 @@ function clearText(field)
     </td>
     </tr>
   </table>
-  
-  <div class='simple'>
-                <select multiple='multiple' class='multiselect' id='simpleCountries'>
-                  <option value='fr'>France</option>
-                  <option value='ca'>Canada</option>
-                  <option value='ar'>Argentina</option>
-                  <option value='pt'>Portugal</option>
-                  <option value='us'>United States</option>
-                  <option value='gb'>United Kingdom</option>
-                  <option value='au'>Australia</option>
-                  <option value='ao'>Angola</option>
-                  <option value='aq'>Antarctica</option>
-                  <option value='bq'>Burkina Faso</option>
-                  <option value='cn'>China</option>
-                </select>
-    <script src="js/jquery.js" type="text/javascript"></script>
-    <script src="js/jquery.multi-select.js" type="text/javascript"></script>
-    <script src="js/application.js" type="text/javascript"></script>
-  </div>
-  
   
   
 <center><br> <button  type="submit">Save & Submit!</button></center>

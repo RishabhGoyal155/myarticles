@@ -17,7 +17,23 @@ function clearText(field)
 
  <link href="css/multi-select.css" rel="stylesheet" type="text/css">
     <link href="css/application.css" rel="stylesheet" type="text/css">
-    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-23068623-1']);
+      _gaq.push(['_setDomainName', '.loudev.com']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+
 </head>
 
 <body>
@@ -60,41 +76,28 @@ function clearText(field)
     </tr>
   </table>
   
+  <div class='simple'>
+                <select multiple='multiple' class='multiselect' id='simpleCountries'>
+                  <option value='fr'>France</option>
+                  <option value='ca'>Canada</option>
+                  <option value='ar'>Argentina</option>
+                  <option value='pt'>Portugal</option>
+                  <option value='us'>United States</option>
+                  <option value='gb'>United Kingdom</option>
+                  <option value='au'>Australia</option>
+                  <option value='ao'>Angola</option>
+                  <option value='aq'>Antarctica</option>
+                  <option value='bq'>Burkina Faso</option>
+                  <option value='cn'>China</option>
+                </select>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery.multi-select.js" type="text/javascript"></script>
+    <script src="js/application.js" type="text/javascript"></script>
+  </div>
   
   
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
-        rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
-        rel="stylesheet" type="text/css" />
-    <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
-        type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#lstFruits').multiselect({
-                includeSelectAllOption: true
-            });
-            $('#btnSelected').click(function () {
-                var selected = $("#lstFruits option:selected");
-                var message = "";
-                selected.each(function () {
-                    message += $(this).text() + " " + $(this).val() + "\n";
-                });
-                alert(message);
-            });
-        });
-    </script>
-    <select id="lstFruits" multiple="multiple">
-        <option value="1">Mango</option>
-        <option value="2">Apple</option>
-        <option value="3">Banana</option>
-        <option value="4">Guava</option>
-        <option value="5">Orange</option>
-    </select>
-    
   
-<center><br> <button id="btnSelected" type="submit">Save & Submit!</button></center>
+<center><br> <button  type="submit">Save & Submit!</button></center>
 
 </form>
 <form><center><br>
