@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
@@ -19,6 +20,8 @@
 </head>
 
 <body>
+<%User user= (User) session.getAttribute("user");
+   if(user!=null){ %>
 	<div id="header_wrapper">
 		<div id="header">
 			<a href="index.jsp"><div id="site_logo"></div></a>
@@ -46,24 +49,27 @@
 			<div id="column_w530">
 				<div class="header_02">
 					Welcome
-					<%@page import="java.sql.*,javax.sql.*"%>
+					<%@page import="com.article.entity.*"%>
 					<%
-						String id = (String) session.getAttribute("id");
-						//String site = new String("details.jsp");
-						out.println(id);
+						//User user= (User) session.getAttribute("user");
+						if(user !=null){
+							out.println(user.getName());	
+						}
+						
 					%>
 				</div>
-				<p class="em_text" style="font-size: 20px">
-					<br> <br>Category:
-				</p>
+				
+				<br>
 				<br>
 				<p style="font-size: 20px">
 					<a href="details.jsp">Details</a>
 				</p>
 				<br>
+				<br>
 				<p style="font-size: 20px">
 					<a href="article_written.jsp">Articles Written by you.</a>
 				</p>
+				<br>
 				<br>
 				<p style="font-size: 20px">
 					<a href="writeArticle.jsp">Write new Article</a>
@@ -93,5 +99,15 @@
 		<!-- end of footer -->
 	</div>
 	<!-- end of footer -->
+	
+	<%}
+   else
+   {
+	   out.println("<script type=\"text/javascript\">");
+	   out.println("alert('You have not logged in properly.Please try again.');");
+	   out.println("location='index.jsp';");
+	   out.println("</script>");
+   }
+   %>
 </body>
 </html>

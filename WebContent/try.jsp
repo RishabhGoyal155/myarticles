@@ -1,9 +1,10 @@
-<%@page import="java.sql.*,com.article.*"%>
+<%@page import="java.sql.*,com.article.entity.*,com.article.dao.*,com.article.*,java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
@@ -13,30 +14,28 @@ function clearText(field)
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
+
 </script>
-
- <link href="css/multi-select.css" rel="stylesheet" type="text/css">
-    <link href="css/application.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-23068623-1']);
-      _gaq.push(['_setDomainName', '.loudev.com']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
-
-
-
 </head>
 
 <body>
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+        rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />
+    <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#category').multiselect({
+                includeSelectAllOption: true
+            });
+        });
+    </script>
+
+
 <div id="header_wrapper">
   <div id="header">   
    	<a href="index.jsp"><div id="site_logo"></div></a>
@@ -55,7 +54,8 @@ function clearText(field)
     
     	<div id="column_w530">	
             <div class="header_02">New Article</div>
- <%String id=(String)session.getAttribute("id");
+ <%User user=(User)session.getAttribute("user");
+
  %>          
        <form action="successArticle.jsp" method="post" name="article" >
                <table>
@@ -65,9 +65,19 @@ function clearText(field)
     </tr>
     <tr height="50">
       <td align="right">Article id:</td>
-      <td align="left"><input type="text" required="required" name="id" /></td>
+      <td align="left"><input type="text" required="required" name="article_id" /></td>
     </tr>
+    <tr height="50">
+      <td align="right">Category:</td>
+      <td align="left"><select id="category" name="category" MULTIPLE multiple="multiple" >
+        <% 
+    ArrayList<Category> CatFromDB = CategoryDao.display();
     
+    for (int i=0; i<CatFromDB.size(); i++){
+     %><option value="<%=CatFromDB.get(i).getId()%>"><%= CatFromDB.get(i).getName() %></option>
+     <%}%>
+    </select></td>
+    </tr>
     <tr height="50" >
       <td align="right" rowspan="10" >Content:</td>
     <td align="left" colspan="5" rowspan="5">
@@ -75,30 +85,7 @@ function clearText(field)
     </td>
     </tr>
   </table>
-  
-  <div class='simple'>
-                <select multiple='multiple' class='multiselect' id='simpleCountries'>
-                  <option value='fr'>France</option>
-                  <option value='ca'>Canada</option>
-                  <option value='ar'>Argentina</option>
-                  <option value='pt'>Portugal</option>
-                  <option value='us'>United States</option>
-                  <option value='gb'>United Kingdom</option>
-                  <option value='au'>Australia</option>
-                  <option value='ao'>Angola</option>
-                  <option value='aq'>Antarctica</option>
-                  <option value='bq'>Burkina Faso</option>
-                  <option value='cn'>China</option>
-                </select>
-    <script src="js/jquery.js" type="text/javascript"></script>
-    <script src="js/jquery.multi-select.js" type="text/javascript"></script>
-    <script src="js/application.js" type="text/javascript"></script>
-  </div>
-  
-  
-  
 <center><br> <button  type="submit">Save & Submit!</button></center>
-
 </form>
 <form><center><br>
 <input type="button" value="Back" 

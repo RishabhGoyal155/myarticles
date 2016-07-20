@@ -1,9 +1,10 @@
-<%@page import="java.sql.*,com.article.*"%>
+<%@page import="java.sql.*,com.article.*,java.io.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
@@ -18,6 +19,8 @@ function clearText(field)
 </head>
 
 <body>
+<%User user= (User) session.getAttribute("user");
+   if(user.getIsAdmin()){ %>
 <div id="header_wrapper">
   <div id="header">   
    	<a href="index.jsp"><div id="site_logo"></div></a>
@@ -40,10 +43,13 @@ function clearText(field)
     
     	<div id="column_w530">	
             <div class="header_02">Welcome 
-     <%@page import="java.sql.*,javax.sql.*" %>
+     <%@page import="com.article.entity.*" %>
 <%
-String id=(String)session.getAttribute("id");
-out.println(id);
+//User user= (User) session.getAttribute("user");
+if(user !=null){
+	out.println(user.getName());	
+}
+
 %>
 </div>
 <p style="font-size:20px"><a href="details.jsp" >Details</a></p><br>
@@ -74,5 +80,16 @@ out.println(id);
         Copyright Reserved © <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
-	</div> <!-- end of footer --></body>
+	</div> <!-- end of footer -->
+	
+	<%}
+   else
+   {
+	   out.println("<script type=\"text/javascript\">");
+	   out.println("alert('You cannot access admin functionalities.');");
+	   out.println("location='index.jsp';");
+	   out.println("</script>");
+   }
+   %>
+	</body>
 </html>

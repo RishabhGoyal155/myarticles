@@ -1,5 +1,5 @@
-<%@page import="com.article.connect.JDBCConnect,java.util.*"%>
-<%@page import="java.sql.*,java.io.*,com.article.dao.*,com.article.entity.*,com.article.*"%>
+<%@page import="com.article.dao.ArticleDao"%>
+<%@page import="java.sql.*,com.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -21,8 +21,12 @@
 </head>
 
 <body>
-<% User user= (User) session.getAttribute("user");
-   if(user.getIsAdmin()){ %>
+<%
+	//Article art= (Article)session.getAttribute("article");
+ String art1=request.getParameter("artic");
+   if(art1 != null) {
+	   Article article=ArticleDao.validate(art1);
+%>
 	<div id="header_wrapper">
 		<div id="header">
 			<a href="index.jsp"><div id="site_logo"></div></a>
@@ -30,44 +34,41 @@
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
-
 					<li><a href="logout.jsp">Logout..</a></li>
 				</ul>
-			</div>
-			<!-- end of menu -->
-		</div>
-		<!-- end of header -->
-	</div>
-	<!-- end of header wrapper -->
-	<br>
-	<br>
-	<br>
+</div>
+<!-- end of menu -->
+</div>
+<!-- end of header -->
+</div>
+<!-- end of header wrapper -->
+	<br><br><br>
 	<div id="content_wrapper">
 		<div id="content">
-        <div id="column_w530">
-				<div class="header_02">Articles</div>
-				<br> <br>
-				<%@page import="java.sql.*,java.io.*,com.article.*"%>
-				<%@page import="com.article.connect.JDBCConnect"%>
-<%
-   ArrayList<Article> artFromDB = ArticleDao.display();
-   String art2;
-    for (int i=0; i<artFromDB.size(); i++){
-    	art2=artFromDB.get(i).getId();
-     %>
-    <font size="5px"><a href="article.jsp?artic=<%=art2%>" >
-    <%=artFromDB.get(i).getName()%>
-    </a><br><br>
-    </font>
-    <%}%>
- <br><br><br> <br>
-				<div class="margin_bottom_20"></div>
-				<div class="margin_bottom_20"></div>
-				<div class="cleaner"></div>
-			</div>
+			<div id="column_w530">
+				<div class="header_02">
+					<%@page import="com.article.entity.*"%>
+					<%	out.println(article.getName());
+					%>
+				</div>
+				
+				<br><br>
+				<p style="font-size: 20px"><%=article.getContent()%>
+				</p> 
+				<br><br><br><br><form>
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;"> 
+</form>
+<br><br><br><br><br>
+			</div><%session.removeAttribute("article"); %>
+			<br><br>
+			<div class="margin_bottom_20"></div>
+			<div class="margin_bottom_20"></div>
 			<div class="cleaner"></div>
 		</div>
-		<!-- end of content wrapper -->
+		<div class="cleaner"></div>
+	</div>
+	<!-- end of content wrapper -->
 	</div>
 	<!-- end of content wrapper -->
 
@@ -82,13 +83,12 @@
 		<!-- end of footer -->
 	</div>
 	<!-- end of footer -->
-	
 	<%}
-   else
+   if(art1==null)
    {
 	   out.println("<script type=\"text/javascript\">");
-	   out.println("alert('You don't have permission to access this page.');");
-	   out.println("location='index.jsp';");
+	   //out.println("alert('.');");
+	   out.println("location='error.jsp';");
 	   out.println("</script>");
    }
    %>

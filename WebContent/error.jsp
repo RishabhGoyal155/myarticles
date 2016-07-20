@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
@@ -25,8 +26,7 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
              <ul>
-                  <li><a  class="current">Author?</a></li>
-                  <li><a href="login.html">Login..</a></li>
+                  <li><a class="current" href="login.html">Login..</a></li>
                   <li><a href="signup.html">Sign Up..</a></li>
             </ul>
       		

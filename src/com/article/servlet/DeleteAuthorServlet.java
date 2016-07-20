@@ -2,17 +2,14 @@ package com.article.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.article.connect.JDBCConnect;
+import com.article.dao.UserDAO;
+import com.article.entity.User;
 
 /**
  * Servlet implementation class DeleteAuthorServlet
@@ -20,46 +17,42 @@ import com.article.connect.JDBCConnect;
 @WebServlet("/DeleteAuthorServlet")
 public class DeleteAuthorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteAuthorServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DeleteAuthorServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		String name=request.getParameter("name");
-		Connection connection = JDBCConnect.getConnection();
-		Statement st;
-		try {
-			st = connection.createStatement();
-			//;
-			String sqlDeleteQuery = "delete from user where name = '"+name+"' or id = '"+name+"'";
-			int i=st.executeUpdate(sqlDeleteQuery);
+
+		User u = new User();
+		u.setName(request.getParameter("name"));
+		int status = UserDAO.delete(u);
+
+		if (status > 0) {
 			out.println("<script type=\"text/javascript\">");
-			if(i==1){
-				
-				   out.println("alert('Author Deleted Successfully.');");
-	        }
-			else{
-				   out.println("alert('No such Author exists!!');");
-			}
-			
-			   out.println("location='welcomeAdmin.jsp';");
-			   out.println("</script>");
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			out.println("alert('Author Deleted Successfully.');");
+			out.println("location='welcomeAdmin.jsp';");
+			out.println("</script>");
+		} else {
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('No such Author exists!!');");
+			out.println("location='welcomeAdmin.jsp';");
+			out.println("</script>");
 		}
-		
+
+		out.println("location='welcomeAdmin.jsp';");
+		out.println("</script>");
+
 	}
-  }
+}

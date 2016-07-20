@@ -1,4 +1,6 @@
 <%@page import="com.article.connect.JDBCConnect,java.util.*"%>
+<%@page import="java.sql.*,java.io.*,com.article.*"%>
+<%@page import="com.article.connect.JDBCConnect"%>
 <%@page import="java.sql.*,java.io.*,com.article.dao.*,com.article.entity.*,com.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -21,17 +23,17 @@
 </head>
 
 <body>
-<% User user= (User) session.getAttribute("user");
-   if(user.getIsAdmin()){ %>
+<%String cat=request.getParameter("categ");
+ArrayList<Article> artFromDB = CategoryDao.fetch(cat);
+String art2;
+ %>
 	<div id="header_wrapper">
 		<div id="header">
 			<a href="index.jsp"><div id="site_logo"></div></a>
 			<div id="menu">
 				<!-- menu starts -->
 				<div id="menu_left"></div>
-				<ul>
-
-					<li><a href="logout.jsp">Logout..</a></li>
+				<ul><li><a href="logout.jsp">Logout..</a></li>
 				</ul>
 			</div>
 			<!-- end of menu -->
@@ -45,22 +47,19 @@
 	<div id="content_wrapper">
 		<div id="content">
         <div id="column_w530">
-				<div class="header_02">Articles</div>
-				<br> <br>
-				<%@page import="java.sql.*,java.io.*,com.article.*"%>
-				<%@page import="com.article.connect.JDBCConnect"%>
-<%
-   ArrayList<Article> artFromDB = ArticleDao.display();
-   String art2;
-    for (int i=0; i<artFromDB.size(); i++){
+				<div class="header_02"><%=cat %></div>
+				<br> <br>			
+<%     for (int i=0; i<artFromDB.size(); i++){
     	art2=artFromDB.get(i).getId();
      %>
-    <font size="5px"><a href="article.jsp?artic=<%=art2%>" >
-    <%=artFromDB.get(i).getName()%>
+    <font size="5px"><a href="article.jsp?artic=<%=art2%>" ><%=artFromDB.get(i).getName()%>
     </a><br><br>
     </font>
     <%}%>
- <br><br><br> <br>
+ <br><br><form>
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;"> 
+</form><br> <br>
 				<div class="margin_bottom_20"></div>
 				<div class="margin_bottom_20"></div>
 				<div class="cleaner"></div>
@@ -83,14 +82,6 @@
 	</div>
 	<!-- end of footer -->
 	
-	<%}
-   else
-   {
-	   out.println("<script type=\"text/javascript\">");
-	   out.println("alert('You don't have permission to access this page.');");
-	   out.println("location='index.jsp';");
-	   out.println("</script>");
-   }
-   %>
+
 </body>
 </html>

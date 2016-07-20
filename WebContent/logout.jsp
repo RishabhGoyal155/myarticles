@@ -1,6 +1,8 @@
+<%@page import="java.sql.*,com.article.entity.*,java.io.*"%>
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
@@ -15,6 +17,8 @@ function clearText(field)
 </head>
 
 <body>
+<%User user= (User) session.getAttribute("user");
+   if(user!=null){ %>
 <div id="header_wrapper">
   <div id="header">   
    	<a href="index.jsp"><div id="site_logo"></div></a>
@@ -57,5 +61,16 @@ function clearText(field)
         Copyright Reserved © <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
-	</div> <!-- end of footer --></body>
+	</div> <!-- end of footer -->
+	<%}
+   else
+   {
+	   out.println("<script type=\"text/javascript\">");
+	   out.println("alert('You have not logged in yet.');");
+	   out.println("location='index.jsp';");
+	   out.println("</script>");
+   }
+   %>
+	
+	</body>
 </html>

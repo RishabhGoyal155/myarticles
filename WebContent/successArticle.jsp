@@ -1,9 +1,12 @@
-<%@page import="java.sql.*,com.article.*,com.article.connect.*"%>
+<%@page import="com.sun.xml.internal.fastinfoset.util.StringArray"%>
+<%@page import="com.article.entity.*,com.article.dao.*"%>
+<%@page import="java.sql.*,com.article.*,com.article.connect.*,java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
@@ -17,6 +20,9 @@ function clearText(field)
 </head>
 
 <body>
+<%User user= (User) session.getAttribute("user");
+   if(user!=null){ %>
+
 <div id="header_wrapper">
   <div id="header">   
    	<a href="index.jsp"><div id="site_logo"></div></a>
@@ -26,10 +32,8 @@ function clearText(field)
             <ul>
                   <li><a href="logout.jsp">Logout..</a></li>
             </ul>    	
-      		
-           </div> <!-- end of menu -->
-         
-    </div>  <!-- end of header -->
+        </div> <!-- end of menu -->
+      </div>  <!-- end of header -->
 	
 </div> <!-- end of header wrapper -->
          <br><br>
@@ -39,37 +43,30 @@ function clearText(field)
       
  <%@page import="java.sql.*,javax.sql.*" %>
 <%
-String name=request.getParameter("name");
-//session.putValue("name", name);
-String author_id=(String)session.getAttribute("id");
-String id=request.getParameter("id");
-String content=request.getParameter("content");
+Article art=new Article();
+art.setName(request.getParameter("name"));
+art.setId(request.getParameter("article_id"));
+art.setContent(request.getParameter("content"));
+String categ[] =request.getParameterValues("category");
+art.setAuthorId(user.getId());
 
 //Get the system date and time.
 java.util.Date utilDate = new java.util.Date();
 //Convert it to java.sql.Date
 java.sql.Date rdate = new java.sql.Date(utilDate.getTime());
-
-Connection c = JDBCConnect.getConnection();
-Statement st=c.createStatement();
-ResultSet rs;
-int i=st.executeUpdate("INSERT INTO article VALUES('"+name+"','"+id+
-		"','"+author_id+"','"+content+"','"+rdate+"')");
-
-if(i==1){
+art.setDate(rdate);
+int status=ArticleDao.add(art,categ); 
+if(status>0)  {
 	out.println("<script type=\"text/javascript\">");
 	   out.println("alert('Article is submitted.');");
 	   out.println("location='welcome.jsp';");
 	   out.println("</script>");
-	
 }
 else{
 	RequestDispatcher rd=request.getRequestDispatcher("error.jsp");  
     rd.forward(request,response); 
 }
-
-%>
-            <div class="margin_bottom_20"></div>
+%>          <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>
         </div>
@@ -84,5 +81,16 @@ else{
         Copyright Reserved © <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
-	</div> <!-- end of footer --></body>
+	</div> <!-- end of footer -->
+	<%}
+   else
+   {
+	   out.println("<script type=\"text/javascript\">");
+	   out.println("alert('Login first.');");
+	   out.println("location='index.jsp';");
+	   out.println("</script>");
+   }
+   %>
+	
+	</body>
 </html>

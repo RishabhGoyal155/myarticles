@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
@@ -16,8 +17,9 @@ function clearText(field)
 </script>
 
 </head>
-
 <body>
+<%User user= (User) session.getAttribute("user");
+   if(user!=null){ %>
 <div id="header_wrapper">
   <div id="header">   
    <a href="index.jsp"><div id="site_logo"></div></a>
@@ -26,43 +28,27 @@ function clearText(field)
       		<div id="menu_left"></div>
             <ul>
                   <li><a href="logout.jsp">Logout..</a></li>
-            </ul>    	
-      		
-           </div> <!-- end of menu -->
-         
-    </div>  <!-- end of header -->
-	
+            </ul>    		
+           </div> <!-- end of menu -->        
+    </div>  <!-- end of header -->	
 </div> <!-- end of header wrapper -->
          <br><br><br>
 <div id="content_wrapper">
-	<div id="content">
-    
+	<div id="content">   
     	<div id="column_w530">	
             <div class="header_02">Details</div>
              <br><br>
-             <%@page import="java.sql.*,javax.sql.*,com.article.connect.*" %>
-<%
-String id=(String)session.getAttribute("id");
-Connection con=JDBCConnect.getConnection(); 
-Statement st=con.createStatement();
-ResultSet rs=st.executeQuery("select * from user where id = '"+id+"'");
-if(!rs.next()) {
-	// New location to be redirected
-	   String site = new String("error.jsp");
-	   response.setStatus(response.SC_MOVED_TEMPORARILY);
-	   response.setHeader("Location", site); 
-} else {
-%>
+             <%@page import="java.sql.*,com.article.entity.*,com.article.connect.*" %>
+
+<font size="5px">
 <strong>ID :</strong> 
-   <%= rs.getString(1) %><br><br>
+   <%= user.getId() %><br><br>
               
-<strong>  Name :</strong><%= rs.getString(2) %><br><br>
-<strong>  Email :</strong> <%= rs.getString(3) %> <br><br>
-<strong>  About :</strong> <%= rs.getString(5) %> <br><br>
-  
-<%
-  }
-%>
+<strong>  Name :</strong><%= user.getName() %><br><br>
+<strong>  Email :</strong> <%=user.getEmail() %> <br><br>
+<strong>  About :</strong> <%= user.getAbout() %> <br><br>
+  </font><br><br><br>
+
 <form>
 <input type="button" value="Back" 
  onClick="history.go(-1);return true;"> 
@@ -83,5 +69,15 @@ if(!rs.next()) {
         Copyright Reserved © <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
-	</div> <!-- end of footer --></body>
+	</div> <!-- end of footer -->
+	<%}
+   else
+   {
+	   out.println("<script type=\"text/javascript\">");
+	   out.println("alert('You have not logged in properly.Please try again.');");
+	   out.println("location='index.jsp';");
+	   out.println("</script>");
+   }
+   %>
+	</body>
 </html>

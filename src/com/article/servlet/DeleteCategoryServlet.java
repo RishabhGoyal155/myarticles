@@ -2,9 +2,8 @@ package com.article.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
-
-import com.article.connect.JDBCConnect;
+import com.article.dao.CategoryDao;
+import com.article.entity.Category;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,36 +14,28 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DeleteCategoryServlet")
 public class DeleteCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public DeleteCategoryServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DeleteCategoryServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		String name=request.getParameter("name");
-		Connection connection = JDBCConnect.getConnection();
-		Statement st;
-		try {
-			st = connection.createStatement();
-			//;
-			String sqlDeleteQuery = "delete from category where name = '"+name+"' or id = '"+name+"'";
-			int i=st.executeUpdate(sqlDeleteQuery);
-			out.println("<script type=\"text/javascript\">");
-			if(i==1){
-				   out.println("alert('Category Deleted Successfully.');");
-	        }
-			else{
-				   out.println("alert('No such Category exists!!');");
-			}
-			   out.println("location='welcomeAdmin.jsp';");
-			   out.println("</script>");
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Category c = new Category();
+		c.setName(request.getParameter("name"));
+		int status = CategoryDao.delete(c);
+
+		out.println("<script type=\"text/javascript\">");
+		if (status > 0) {
+			out.println("alert('Category Deleted Successfully.');");
+		} else {
+			out.println("alert('No such Category exists!!');");
 		}
+		out.println("location='welcomeAdmin.jsp';");
+		out.println("</script>");
+
 	}
-  }
+}

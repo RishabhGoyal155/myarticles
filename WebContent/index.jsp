@@ -1,10 +1,11 @@
-<%@page import="com.article.connect.JDBCConnect"%>
-<%@page import="java.sql.*,java.io.*,com.article.*"%>
+<%@page import="com.article.connect.JDBCConnect,java.util.*"%>
+<%@page import="java.sql.*,java.io.*,com.article.dao.*,com.article.entity.*,com.article.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
    <head>
+   <link rel="shortcut icon" href="images/logo1.png" />
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <title>MY ARTICLE</title>
       <link href="style.css" rel="stylesheet" type="text/css" />
@@ -50,27 +51,14 @@
        <div class="dropdown">
   <button class="dropbtn">Category</button>
   <div class="dropdown-content">        
-  <% PrintWriter out1 = response.getWriter();
-	Connection connection = JDBCConnect.getConnection();
-	Statement st;
-	try {
-	st = connection.createStatement();
-	String sqlSelectQuery = "select name from category order by name";
-		ResultSet i=st.executeQuery(sqlSelectQuery);
-		if(i.next()){
-			i.beforeFirst();
-			while(i.next()){
- %>
-    <a href="article.jsp" ><%= i.getString(1) %></a>
-    <%
- }
-		}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
- %>     
-    
+   <% 
+    ArrayList<Category> CatFromDB = CategoryDao.display();
+    String cat2;
+    for (int i=0; i<CatFromDB.size(); i++){
+    	cat2=CatFromDB.get(i).getId();;
+     %><a href="categoryArticle.jsp?categ=<%=cat2%>"><%= CatFromDB.get(i).getName() %></a><% 
+   }     		   
+   %>
   </div>
 </div>
             </div>
@@ -101,33 +89,39 @@
                <div class="header_03">Latest Articles</div>
                <div class="column_w300_section_01">
                   <div class="news_content">
-                     <div class="news_date">OCT 29, 2016</div>
-                     <div class="header_04"><a href="#">Heding 1</a></div>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a justo dolor.</p>
+                     <%
+                    ArrayList<Article> artFromDB = ArticleDao.display();
+                		  String art2;
+                      for (int i=0; i<artFromDB.size(); i++){
+                    	  art2=artFromDB.get(i).getId();
+                      if(i==0){ %>
+                     <div class="header_04"><a href="article.jsp?artic=<%=art2%>" ><%=artFromDB.get(i).getName() %></a></div>
+                     <p><%=artFromDB.get(i).getContent()%></p>
                   </div>
                   <div class="cleaner"></div>
                </div>
-               <div class="column_w300_section_01 even_color">
+               <%}if(i==1){ %>
+                    <div class="column_w300_section_01 even_color">
                   <div class="news_content">
-                     <div class="news_date">OCT 28, 2016</div>
-                     <div class="header_04"><a href="#">heading 2</a></div>
-                     <p>Nam ultricies cursus enim, non aliquet orci lacinia ac. Etiam lobortis adipiscing.</p>
+                     <div class="header_04"><a href="article.jsp?artic=<%=art2%>" ><%=artFromDB.get(i).getName() %></a></div>
+                     <p><%=artFromDB.get(i).getContent()%></p>
                   </div>
                   <div class="cleaner"></div>
                </div>
+               <%}if(i==2){ %>
                <div class="column_w300_section_01">
                   <div class="news_content">
-                     <div class="news_date">OCT 27, 2016</div>
-                     <div class="header_04"><a href="#">Heading 3</a></div>
-                     <p>Aliquam porttitor nibh in erat porttitor in accumsan dui pulvinar.</p>
-                  </div>
+                     <div class="header_04"><a href="article.jsp?artic=<%=art2%>" ><%=artFromDB.get(i).getName() %></a></div>
+                     <p><%=artFromDB.get(i).getContent()%></p>
+                  </div> 
                   <div class="cleaner"></div>
                </div>
                <div class="cleaner"></div>
             </div>
             <div class="cleaner"></div>
          </div>
-         <!-- end of content wrapper -->
+         <%}}%>
+         <!-- end of content wrapper 
       </div>
       <!-- end of content wrapper -->
       <div id="footer_wrapper">
