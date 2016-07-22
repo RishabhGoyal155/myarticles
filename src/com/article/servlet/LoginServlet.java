@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		User user = new User();
-		user.setId(request.getParameter("id"));
+		user.setUsername(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
 		PrintWriter out = response.getWriter();
 		RequestDispatcher rd;

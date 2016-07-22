@@ -20,7 +20,7 @@ function clearText(field)
 
 <body>
 <%User user= (User) session.getAttribute("user");
-   if(user.getIsAdmin()){ %>
+   if(user!=null && user.getIsAdmin()){ %>
 <div id="header_wrapper">
   <div id="header">   
    	<a href="index.jsp"><div id="site_logo"></div></a>
@@ -55,10 +55,10 @@ if(user !=null){
 <p style="font-size:20px"><a href="details.jsp" >Details</a></p><br>
 <p style="font-size:20px"><a href="writeArticle.jsp">Add Article</a></p><br>
 <p style="font-size:20px"><a href="signup.html">Add Author</a></p><br>
-<p style="font-size:20px"><a href="addCategory.html" >Add Category</a></p><br>
-<p style="font-size:20px"><a href="deleteArticle.html">Delete article</a></p><br>
-<p style="font-size:20px"><a href="deleteAuthor.html">Delete author</a></p><br>
-<p style="font-size:20px"><a href="deleteCategory.html" >Delete Category</a></p><br>
+<p style="font-size:20px"><a href="addCategory.jsp" >Add Category</a></p><br>
+<p style="font-size:20px"><a href="deleteArticle.jsp">Delete article</a></p><br>
+<p style="font-size:20px"><a href="deleteAuthor.jsp">Delete author</a></p><br>
+<p style="font-size:20px"><a href="deleteCategory.jsp" >Delete Category</a></p><br>
 <p style="font-size:20px"><a href="articleList.jsp">See articles</a></p><br>
 
 </div>

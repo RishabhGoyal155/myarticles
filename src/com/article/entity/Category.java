@@ -2,22 +2,22 @@ package com.article.entity;
 
 public class Category {
 
-	private String id;
+	private int id;
 	private String name;
 
 	public Category() {
 	}
 
-	public Category(String ID, String NAME) {
+	public Category(int ID, String NAME) {
 		this.id = ID;
 		this.name = NAME;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

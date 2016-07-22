@@ -41,9 +41,7 @@ function clearText(field)
              <%@page import="java.sql.*,com.article.entity.*,com.article.connect.*" %>
 
 <font size="5px">
-<strong>ID :</strong> 
-   <%= user.getId() %><br><br>
-              
+<strong>User Name :</strong> <%= user.getUsername() %><br><br>
 <strong>  Name :</strong><%= user.getName() %><br><br>
 <strong>  Email :</strong> <%=user.getEmail() %> <br><br>
 <strong>  About :</strong> <%= user.getAbout() %> <br><br>

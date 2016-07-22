@@ -18,7 +18,7 @@ function clearText(field)
 
 <body>
 <%User user= (User) session.getAttribute("user");
-   if(user!=null){ %>
+  if(user!=null){ %>
 <div id="header_wrapper">
   <div id="header">   
    	<a href="index.jsp"><div id="site_logo"></div></a>
@@ -63,7 +63,7 @@ function clearText(field)
     </div> <!-- end of footer -->
 	</div> <!-- end of footer -->
 	<%}
-   else
+  else
    {
 	   out.println("<script type=\"text/javascript\">");
 	   out.println("alert('You have not logged in yet.');");

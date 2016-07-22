@@ -54,16 +54,18 @@
 				<br>
 				<%@page import="java.sql.*,javax.sql.*,com.article.entity.*,com.article.connect.*"%>
 				<%
-				 ArrayList<Article> artFromDB = ArticleDao.display(user);
-				   String art2;
-				    for (int i=0; i<artFromDB.size(); i++){
-				    	art2=artFromDB.get(i).getId();
+				 ArrayList<Article> artFromDB = ArticleDao.displayToUser(user);
+				    int id;
+				   if(artFromDB.size()==0){%><font size="5px">You have not written any article.</font><br><br><br><br><%}
+				   else{ for (int i=0; i<artFromDB.size(); i++){
+				    	
+				    	id=artFromDB.get(i).getId();
 				    %>
-				    <font size="5px"><a href="article.jsp?artic=<%=art2%>" >
+				    <font size="5px"><a href="article.jsp?artic=<%=id%>" >
                        <%=artFromDB.get(i).getName()%>
                     </a><br><br>
 				    </font>
-				    <%}%>
+				    <%}}%>
 				
 				<br> <br><br><br>
 				<form>

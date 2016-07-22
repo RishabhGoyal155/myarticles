@@ -19,6 +19,9 @@
       </script>
    </head>
    <body>
+   <% User user= (User) session.getAttribute("user");
+   %>
+   
       <div id="header_wrapper">
          <div id="header">
             <a href="index.jsp">
@@ -28,8 +31,12 @@
                <!-- menu starts -->
                <div id="menu_left"></div>
                <ul>
+               <%if(user!=null){ %>
+               <li><a class="current" href="logout.jsp">Log Out </a></li>
+               <%} else{%>
                <li><a class="current" href="login.html">Log In </a></li>
                <li><a href="signup.html">Sign UP</a></li>
+              <%} %>
                </ul>
             </div>
             <!-- end of menu -->
@@ -53,7 +60,7 @@
   <div class="dropdown-content">        
    <% 
     ArrayList<Category> CatFromDB = CategoryDao.display();
-    String cat2;
+    int cat2;
     for (int i=0; i<CatFromDB.size(); i++){
     	cat2=CatFromDB.get(i).getId();;
      %><a href="categoryArticle.jsp?categ=<%=cat2%>"><%= CatFromDB.get(i).getName() %></a><% 
@@ -90,10 +97,12 @@
                <div class="column_w300_section_01">
                   <div class="news_content">
                      <%
-                    ArrayList<Article> artFromDB = ArticleDao.display();
+                    ArrayList<Article> artFromDB = ArticleDao.displayAll();
                 		  String art2;
-                      for (int i=0; i<artFromDB.size(); i++){
-                    	  art2=artFromDB.get(i).getId();
+                		  if(artFromDB.size()!=0){
+                	for (int i=0; i<artFromDB.size(); i++){
+                    	  art2=String.valueOf(artFromDB.get(i).getId());
+                    	  
                       if(i==0){ %>
                      <div class="header_04"><a href="article.jsp?artic=<%=art2%>" ><%=artFromDB.get(i).getName() %></a></div>
                      <p><%=artFromDB.get(i).getContent()%></p>
@@ -120,7 +129,19 @@
             </div>
             <div class="cleaner"></div>
          </div>
-         <%}}%>
+         <%}}}else{
+        	 %>
+             <div class="header_04">No Article Present</div>
+             <p></p>
+          </div>
+          <div class="cleaner"></div>
+       </div>
+       <%
+         }%>
+         <div class="cleaner"></div>
+            </div>
+            <div class="cleaner"></div>
+         </div>
          <!-- end of content wrapper 
       </div>
       <!-- end of content wrapper -->

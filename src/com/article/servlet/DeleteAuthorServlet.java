@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.article.dao.UserDAO;
 import com.article.entity.User;
 
@@ -33,26 +35,33 @@ public class DeleteAuthorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+        User user= (User) session.getAttribute("user");
+		
+		
 		PrintWriter out = response.getWriter();
-
-		User u = new User();
-		u.setName(request.getParameter("name"));
-		int status = UserDAO.delete(u);
-
-		if (status > 0) {
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Author Deleted Successfully.');");
-			out.println("location='welcomeAdmin.jsp';");
-			out.println("</script>");
-		} else {
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('No such Author exists!!');");
-			out.println("location='welcomeAdmin.jsp';");
-			out.println("</script>");
+		int status=0;
+		String id[]= request.getParameterValues("deleteId");
+		for(int i=0;i<id.length;i++){
+			int userId = Integer.parseInt(id[i]); 
+			User users = new User();
+			users.setId(userId);
+			status =UserDAO.delete(users); 
 		}
-
-		out.println("location='welcomeAdmin.jsp';");
-		out.println("</script>");
-
-	}
+		out.println("<script type=\"text/javascript\">");
+		
+		if (status > 0) {
+			out.println("alert('Author Deleted Successfully.');");
+			if(user.getIsAdmin()){
+				   out.println("location='welcomeAdmin.jsp';");}else{
+			   out.println("location='welcome.jsp';");}
+			 out.println("</script>");
+		} else {
+			out.println("alert('Some error has occured!!');");
+			out.println("location='error.jsp';");}
+		    out.println("</script>");
+			}
+		
+	
 }
+	

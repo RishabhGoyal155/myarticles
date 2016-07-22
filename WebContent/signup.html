@@ -11,6 +11,15 @@ function clearText(field)
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
+
+function validate(form) {
+	  var e = form.elements;
+ if(e['password'].value != e['confirm_password'].value) {
+	    alert('Your passwords do not match. Please try again.');
+	    return false;
+	  }
+	  return true;
+	}
 </script>
 </head>
 
@@ -35,14 +44,14 @@ function clearText(field)
 	<div id="content">
     
     	<div id="column_w530">	
-            <div class="header_02">Register</div>
+            <div class="header_02">Sign Up</div>
              <br><br>
-             <form action="SignUpServlet" method="post" name="signin" >
-     <br>
+             <form action="SignUpServlet" method="post" name="signin" onsubmit="return validate(this);" >
+     <br> <fieldset>
              <table>
              <tr>
-      <td align="right">User id:</td>
-      <td align="left"><input type="text" required="required" name="id"  /></td>
+      <td align="right">User name:</td>
+      <td align="left"><input type="text" required="required" name="username"  /></td>
     </tr>
     
     <tr>
@@ -55,18 +64,24 @@ function clearText(field)
     </tr>
     <tr>
       <td align="right">password:</td>
-      <td align="left"><input type="password" required="required" name="password" /></td>
+      <td align="left"><input type="password" size="21" required="required" name="password" /></td>
+    </tr>
+    <tr>
+    <tr>
+      <td align="right">Confirm password:</td>
+      <td align="left"><input type="password" size="21" required="required" name="confirm_password" /></td>
     </tr>
     <tr>
       <td align="right">About:</td>
-      <td align="left" rowspan="2" colspan="4"><input type="text" required="required" name="about" /></td>
-    </tr>
+      <td><textarea name="about" required="required"  cols="17" rows="5"></textarea></td>
+        </tr>
   </table>
-  <br><br>
- <center><button type="submit">Register!</button></center><br> <p align="right"><a href=#>Forget password?</a></p>
-</form>
-      
-            <div class="margin_bottom_20"></div>
+  <br>&emsp;&emsp;&emsp;&emsp;
+  &emsp;&emsp;&emsp;&emsp;&emsp;
+  <button type="submit">  Sign Up!</button>
+  
+  </fieldset>
+</form> <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>
         </div>

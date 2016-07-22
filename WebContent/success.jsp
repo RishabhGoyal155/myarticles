@@ -1,4 +1,4 @@
-<%@page import="java.sql.*,com.article.*"%>
+<%@page import="java.sql.*,com.article.*,com.article.entity.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -18,6 +18,15 @@ function clearText(field)
 </head>
 
 <body>
+
+<%User user= (User) session.getAttribute("user");
+if(user!=null && user.getIsAdmin()){
+	out.println("<script type=\"text/javascript\">");
+	out.println("alert('Author added Successfully.');");
+	out.println("location='welcomeAdmin.jsp';");
+	out.println("</script>");}
+else{
+   %>
 <div id="header_wrapper">
   <div id="header">   
    	<a href="index.jsp"><div id="site_logo"></div></a>
@@ -25,10 +34,13 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-                  <li><a class="current" href="login.html">Log In</a></li>
-                  <li><a href="signup.html">Sign Up</a></li>
-            </ul>    	
-      		
+               <%if(user!=null){ %>
+               <li><a class="current" href="logout.jsp">Log Out </a></li>
+               <%} else{%>
+               <li><a class="current" href="login.html">Log In </a></li>
+               <li><a href="signup.html">Sign UP</a></li>
+              <%} %>
+               </ul>
            </div> <!-- end of menu -->
          
     </div>  <!-- end of header -->
@@ -39,10 +51,10 @@ function clearText(field)
 	<div id="content">
     
     <div id="column_w530">	
-          <div class="header_02">Registered</div>
+          <div class="header_02">Signed Up</div>
        <br><br>
        <font size="4px">
-You have successfully registered.<br/>Now goto <a href="login.html">Login page.</a></font>
+You have successfully Signed Up.<br><br/>Now goto <a href="login.html">Login page.</a></font>
 <br><br>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
@@ -59,5 +71,9 @@ You have successfully registered.<br/>Now goto <a href="login.html">Login page.<
         Copyright Reserved © <a href="#">Myarticles.com</a>  by <a href="#">Rishabh Goyal</a>
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
-	</div> <!-- end of footer --></body>
+	</div> <!-- end of footer -->
+	<%}
+   %>
+	
+	</body>
 </html>

@@ -21,8 +21,7 @@
 </head>
 
 <body>
-<%
-	//Article art= (Article)session.getAttribute("article");
+<%User user= (User) session.getAttribute("user");
  String art1=request.getParameter("artic");
    if(art1 != null) {
 	   Article article=ArticleDao.validate(art1);
@@ -34,8 +33,13 @@
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
-					<li><a href="logout.jsp">Logout..</a></li>
-				</ul>
+               <%if(user!=null){ %>
+               <li><a class="current" href="logout.jsp">Log Out </a></li>
+               <%} else{%>
+               <li><a class="current" href="login.html">Log In </a></li>
+               <li><a href="signup.html">Sign UP</a></li>
+              <%} %>
+               </ul>
 </div>
 <!-- end of menu -->
 </div>
@@ -84,10 +88,10 @@
 	</div>
 	<!-- end of footer -->
 	<%}
-   if(art1==null)
+   else
    {
 	   out.println("<script type=\"text/javascript\">");
-	   //out.println("alert('.');");
+	   //out.println("alert('There is some problem in displaying this a.');");
 	   out.println("location='error.jsp';");
 	   out.println("</script>");
    }

@@ -9,8 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.article.dao.CategoryDao;
 import com.article.entity.Category;
+import com.article.entity.User;
 
 @WebServlet("/AddCategoryServlet")
 public class AddCategoryServlet extends HttpServlet {
@@ -24,17 +27,20 @@ public class AddCategoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// HttpSession session = request.getSession();
-
+		HttpSession session = request.getSession();
+        User user= (User) session.getAttribute("user");
+		
+		
 		PrintWriter out = response.getWriter();
 		Category c = new Category();
-		c.setId(request.getParameter("id"));
 		c.setName(request.getParameter("name"));
 		int status = CategoryDao.add(c);
 		if (status > 0) {
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Category Added Successfully.');");
-			out.println("location='welcomeAdmin.jsp';");
+			if(user.getIsAdmin()){
+				   out.println("location='welcomeAdmin.jsp';");}else{
+			   out.println("location='welcome.jsp';");}
 			out.println("</script>");
 
 		} else {

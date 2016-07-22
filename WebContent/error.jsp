@@ -48,10 +48,12 @@ function clearText(field)
 Some Error has occured. Please try after some time . 
 <a href="index.jsp"> Home Page</a>
 </strong>
+        <br><br><br><br><br><br>
             <div class="margin_bottom_20"></div>
             <div class="margin_bottom_20"></div>           
            <div class="cleaner"></div>
         </div>
+        <br><br><br><br><br><br><br><br>
     <div class="cleaner"></div>
     </div> <!-- end of content wrapper -->
 </div> <!-- end of content wrapper -->

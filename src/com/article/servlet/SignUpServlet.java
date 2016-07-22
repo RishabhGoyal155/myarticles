@@ -37,7 +37,7 @@ public class SignUpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		User user = new User();
-		user.setId(request.getParameter("id"));
+		user.setUsername(request.getParameter("username"));
 		user.setName(request.getParameter("name"));
 		user.setEmail(request.getParameter("email"));
 		user.setAbout(request.getParameter("about"));

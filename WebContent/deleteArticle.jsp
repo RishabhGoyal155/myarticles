@@ -1,7 +1,8 @@
 <%@page import="com.article.connect.JDBCConnect,java.util.*"%>
 <%@page import="java.sql.*,java.io.*,com.article.dao.*,com.article.entity.*,com.article.*"%>
+<%@page import="java.sql.*,com.article.*,com.article.entity.*,java.io.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,12 +18,40 @@
 			field.value = field.defaultValue;
 	}
 </script>
+<script type="text/javascript">
 
+function valthisform()
+{
+	var chk = document.getElementsByName('deleteId')
+	var len = chk.length
+
+	for(i=0;i<len;i++)
+	{
+	     if(chk[i].checked){
+	    return true;
+	      }
+	}
+	return false;
+
+}
+ </script> 
+<style>table{
+width: 200px;
+}
+td, th {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  overflow: hidden;
+    width: 200px;
+    max-width: 200px;
+}</style>
 </head>
 
 <body>
-<% User user= (User) session.getAttribute("user");
-   if(user!=null && user.getIsAdmin()){ %>
+<%User user= (User) session.getAttribute("user");
+   if(user!=null && user.getIsAdmin()){ 
+   ArrayList<Article> artFromDB = ArticleDao.displayAll();
+   %>
 	<div id="header_wrapper">
 		<div id="header">
 			<a href="index.jsp"><div id="site_logo"></div></a>
@@ -30,12 +59,14 @@
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
-                <li><a href="logout.jsp">Logout..</a></li>
+					<li><a href="logout.jsp">Logout..</a></li>
 				</ul>
 			</div>
 			<!-- end of menu -->
+
 		</div>
 		<!-- end of header -->
+
 	</div>
 	<!-- end of header wrapper -->
 	<br>
@@ -43,27 +74,58 @@
 	<br>
 	<div id="content_wrapper">
 		<div id="content">
-        <div id="column_w530">
-				<div class="header_02">Articles</div>
+
+			<div id="column_w530">
+				<div class="header_02">Delete Article</div>
+				<br>
+				<br>
+				<%if(artFromDB!=null){ %>
+        <form action="DeleteArticleServlet" method="post" name="DeleteArticle">
 				<br> <br>
-				<%@page import="java.sql.*,java.io.*,com.article.*"%>
-				<%@page import="com.article.connect.JDBCConnect"%>
-<%
-    ArrayList<Article> artFromDB = ArticleDao.displayAll();
-   int art2;
+				<br>
+	<table >
+	<thead>
+<tr>
+<td></td>
+<th>Heading</th>
+<th>Author id</th>
+<th >Content</th>
+</tr>
+</thead>
+<tbody>
+<%  
+   int article_id;
     for (int i=0; i<artFromDB.size(); i++){
-    	art2=artFromDB.get(i).getId();
+    	article_id=artFromDB.get(i).getId();
+    	if(i%2==0){
      %>
-    <font size="5px"><a href="article.jsp?artic=<%=art2%>" >
-    <%=artFromDB.get(i).getName()%>
-    </a><br><br>
-    </font>
-    <%}%>
- <br><br>
- <form>
+<tr style="background-color: #9ACD32">
+<%}else{%>
+<tr>
+<%} %>
+<td>
+<input type="checkbox" name="deleteId" id="articles" value="<%=article_id%>" />
+</td>
+<td><%=artFromDB.get(i).getName()%></td>
+<td><%=artFromDB.get(i).getAuthor_name()%></td>
+<td><%=artFromDB.get(i).getContent()%> </td>
+ </tr>
+<%}
+%>
+</tbody>
+</table>
+<br><br> <br><br>
+<input type="submit" value="Delete" onclick="return valthisform();">
+				<br>
+				</form>
+				<%}else{%>
+				No article Present To Delete.
+				<br><br><br><br><br>
+				<form>
 <input type="button" value="Back" 
  onClick="history.go(-1);return true;"> 
-</form><br> <br>
+</form>
+				<%} %>
 				<div class="margin_bottom_20"></div>
 				<div class="margin_bottom_20"></div>
 				<div class="cleaner"></div>
@@ -85,12 +147,11 @@
 		<!-- end of footer -->
 	</div>
 	<!-- end of footer -->
-	
-	<%}
+		<%}
    else
    {
 	   out.println("<script type=\"text/javascript\">");
-	   out.println("alert('You don't have permission to access this page.');");
+	   out.println("alert('You cannot access admin functionalities.');");
 	   out.println("location='index.jsp';");
 	   out.println("</script>");
    }

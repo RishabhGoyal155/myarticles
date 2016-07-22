@@ -50,15 +50,12 @@
 				<div class="header_02">
 					Welcome
 					<%@page import="com.article.entity.*"%>
-					<%
-						//User user= (User) session.getAttribute("user");
-						if(user !=null){
-							out.println(user.getName());	
-						}
-						
-					%>
+				<%
+					if(user !=null){
+					out.println(user.getName());	
+				}
+			    %>
 				</div>
-				
 				<br>
 				<br>
 				<p style="font-size: 20px">
@@ -99,7 +96,6 @@
 		<!-- end of footer -->
 	</div>
 	<!-- end of footer -->
-	
 	<%}
    else
    {
