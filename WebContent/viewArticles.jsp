@@ -17,9 +17,6 @@
 		else if (field.value == '')
 			field.value = field.defaultValue;
 	}
-</script>
-<script type="text/javascript">
-
 function valthisform()
 {
 	var chk = document.getElementsByName('deleteId')
@@ -32,9 +29,28 @@ function valthisform()
 	      }
 	}
 	return false;
-
 }
- </script> 
+function validateEdit()
+{
+	var chk = document.getElementsByName('deleteId')
+	var len = chk.length
+	var c=0
+	for(i=0;i<len;i++)
+	{
+	     if(chk[i].checked){
+	    c=c+1;
+	      }
+	}
+	if(c==1){return true;}
+	else{return false;}
+    
+	}
+ function openPage(pageURL)
+ {
+ window.location.href = pageURL;
+ }
+</script>
+
 <style>table{
 width: 200px;
 }
@@ -59,6 +75,7 @@ td, th {
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
+				<li><a class="current" href="welcomeAdmin.jsp"><%=user.getName()%> </a></li>
 					<li><a href="logout.jsp">Logout..</a></li>
 				</ul>
 			</div>
@@ -76,7 +93,7 @@ td, th {
 		<div id="content">
 
 			<div id="column_w530">
-				<div class="header_02">Delete Article</div>
+				<div class="header_02">Articles</div>
 				<br>
 				<br>
 				<%if(artFromDB!=null){ %>
@@ -115,8 +132,14 @@ td, th {
 </tbody>
 </table>
 <br><br> <br><br>
-<input type="submit" value="Delete" onclick="return valthisform();">
-				<br>
+<input type="button" value="Add New" name="Add new" onclick="openPage('writeArticle.jsp')">
+&emsp;
+<input type="submit" value="Delete" onclick="return valthisform();" >&emsp;
+<!-- <input type="submit" value="Edit" onclick="return validateEdit();">&emsp; -->
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;">
+&emsp;
+
 				</form>
 				<%}else{%>
 				No article Present To Delete.

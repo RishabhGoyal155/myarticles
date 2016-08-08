@@ -34,11 +34,16 @@ int art2;
 			<div id="menu">
 				<!-- menu starts -->
 				<div id="menu_left"></div>
-				<ul>  <%if(user!=null){ %>
-               <li><a class="current" href="logout.jsp">Log Out </a></li>
+				<ul>
+				<%if(user!=null){ if(user.getIsAdmin()){%>
+               <li><a class="current" href="welcomeAdmin.jsp"><%=user.getName()%> </a></li>
+               <%}else{%>
+                <li><a class="current" href="welcome.jsp"><%=user.getName()%> </a></li>
+              <%} %>
+               <li><a href="logout.jsp">Log Out </a></li>
                <%} else{%>
                <li><a class="current" href="login.html">Log In </a></li>
-               <li><a href="signup.html">Sign UP</a></li>
+               <li><a href="signup.html">Sign Up</a></li>
               <%} %>
 				</ul>
 			</div>

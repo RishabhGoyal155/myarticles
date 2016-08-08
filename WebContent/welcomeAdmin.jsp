@@ -28,7 +28,8 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
             <ul>
-                  <li><a href="logout.jsp">Logout..</a></li>
+            <li><a class="current" href="welcomeAdmin.jsp"><%=user.getName()%> </a></li>
+                  <li><a href="logout.jsp">Log Out</a></li>
             </ul>    	
       		
            </div> <!-- end of menu -->
@@ -53,12 +54,9 @@ if(user !=null){
 %>
 </div>
 <p style="font-size:20px"><a href="details.jsp" >Details</a></p><br>
-<p style="font-size:20px"><a href="writeArticle.jsp">Add Article</a></p><br>
-<p style="font-size:20px"><a href="signup.html">Add Author</a></p><br>
-<p style="font-size:20px"><a href="addCategory.jsp" >Add Category</a></p><br>
-<p style="font-size:20px"><a href="deleteArticle.jsp">Delete article</a></p><br>
-<p style="font-size:20px"><a href="deleteAuthor.jsp">Delete author</a></p><br>
-<p style="font-size:20px"><a href="deleteCategory.jsp" >Delete Category</a></p><br>
+<p style="font-size:20px"><a href="viewArticles.jsp">Articles</a></p><br>
+<p style="font-size:20px"><a href="viewAuthor.jsp">Authors</a></p><br>
+<p style="font-size:20px"><a href="viewCategory.jsp" >Categories</a></p><br>
 <p style="font-size:20px"><a href="articleList.jsp">See articles</a></p><br>
 
 </div>

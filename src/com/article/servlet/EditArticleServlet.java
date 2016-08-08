@@ -14,26 +14,28 @@ import javax.servlet.http.HttpSession;
 import com.article.dao.ArticleDao;
 import com.article.entity.Article;
 import com.article.entity.User;
+
 /**
- * Servlet implementation class AddArticleServlet
+ * Servlet implementation class EditArticleServlet
  */
-@WebServlet("/AddArticleServlet")
-public class AddArticleServlet extends HttpServlet {
+@WebServlet("/EditArticleServlet")
+public class EditArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddArticleServlet() {
+    public EditArticleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/** 
+/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
 		
@@ -42,17 +44,18 @@ public class AddArticleServlet extends HttpServlet {
 				//Convert it to java.sql.Date
 				java.sql.Date rdate = new java.sql.Date(utilDate.getTime());
 		
-		User user= (User) session.getAttribute("user");
+			String id=(String)session.getAttribute("articleId");
+	    User user= (User) session.getAttribute("user");
+	    int articleid=Integer.parseInt(id);
 		Article article=new Article();
+		article.setId(articleid);
 		article.setName(request.getParameter("name"));
 		article.setContent(request.getParameter("content"));
-		String categ[] =request.getParameterValues("category");
-		article.setAuthor_name(user.getUsername());
-        article.setDate(rdate);
-		int status=ArticleDao.add(article,categ,user); 
+		article.setDate(rdate);
+		int status=ArticleDao.update(article); 
 		if(status>0)  {
 			out.println("<script type=\"text/javascript\">");
-			   out.println("alert('Article is submitted.');");
+			   out.println("alert('Article is saved.');");
 			   if(user.getIsAdmin()){
 				   out.println("location='welcomeAdmin.jsp';");}else{
 			   out.println("location='welcome.jsp';");}
@@ -62,6 +65,8 @@ public class AddArticleServlet extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher("error.jsp");  
 		    rd.forward(request,response); 
 		}	
+
+
 	}
 
 }

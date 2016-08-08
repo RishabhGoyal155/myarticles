@@ -34,7 +34,12 @@ function valthisform()
 	return false;
 
 }
- </script> 
+ </script> <script type="text/javascript">
+ function openPage(pageURL)
+ {
+ window.location.href = pageURL;
+ }
+</script>
 </head>
 
 <body>
@@ -48,6 +53,7 @@ function valthisform()
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
+				<li><a class="current" href="welcomeAdmin.jsp"><%=user.getName()%> </a></li>
 					<li><a href="logout.jsp">Logout..</a></li>
 				</ul>
 			</div>
@@ -63,7 +69,7 @@ function valthisform()
 		<div id="content">
 
 			<div id="column_w530">
-				<div class="header_02">Delete Category</div>
+				<div class="header_02">Categories</div>
 				<br>
 				<br>
 				<%if(catFromDB.size()==0){%>
@@ -101,10 +107,13 @@ function valthisform()
 </tbody>
 </table>
 <br><br> <br><br>
-<input type="submit" value="Delete" onclick="return valthisform();">
-				<br>
+<input type="button" value="Add New" name="Add new" onclick="openPage('addCategory.jsp')">
+&emsp;
+<input type="submit" value="Delete" onclick="return valthisform();">&emsp;
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;">
+				
 				</form><%} %>
-
 				<div class="margin_bottom_20"></div>
 				<div class="margin_bottom_20"></div>
 				<div class="cleaner"></div>

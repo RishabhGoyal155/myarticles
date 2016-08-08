@@ -29,7 +29,8 @@
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
-					<li><a href="logout.jsp">Logout..</a></li>
+				<li><a class="current" href="welcome.jsp"><%=user.getName()%> </a></li>
+					<li><a href="logout.jsp">Log Out</a></li>
 				</ul>
 
 			</div>

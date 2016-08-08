@@ -3,7 +3,7 @@
 <head>
  <link rel="shortcut icon" href="images/logo1.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Signin</title>
+<title>MY ARTICLES</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 function clearText(field)
@@ -15,7 +15,7 @@ function clearText(field)
 function validate(form) {
 	  var e = form.elements;
  if(e['password'].value != e['confirm_password'].value) {
-	    alert('Your passwords do not match. Please try again.');
+	    alert('Password and confirm password does not match.');
 	    return false;
 	  }
 	  return true;
@@ -51,19 +51,19 @@ function validate(form) {
              <table>
              <tr>
       <td align="right">User name:</td>
-      <td align="left"><input type="text" required="required" name="username"  /></td>
+      <td align="left"><input type="text" size="21" required="required" name="username"  /></td>
     </tr>
     
     <tr>
       <td align="right"> Name:</td>
-      <td align="left"><input type="text" required="required" name="name" /></td>
+      <td align="left"><input type="text" size="21" required="required" name="name" /></td>
     </tr>
      <tr>
       <td align="right">Email:</td>
-      <td align="left"><input type="text" required="required" name="email" /></td>
+      <td align="left"><input type="email" size="21" required="required"  name="email" /></td>
     </tr>
     <tr>
-      <td align="right">password:</td>
+      <td align="right">Password:</td>
       <td align="left"><input type="password" size="21" required="required" name="password" /></td>
     </tr>
     <tr>

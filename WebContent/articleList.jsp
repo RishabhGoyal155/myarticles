@@ -30,7 +30,8 @@
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
-                <li><a href="logout.jsp">Logout..</a></li>
+				<li><a class="current" href="welcomeAdmin.jsp"><%=user.getName()%> </a></li>
+                <li><a href="logout.jsp">Log Out</a></li>
 				</ul>
 			</div>
 			<!-- end of menu -->
@@ -51,14 +52,15 @@
 <%
     ArrayList<Article> artFromDB = ArticleDao.displayAll();
    int art2;
-    for (int i=0; i<artFromDB.size(); i++){
+   if(artFromDB.size()==0){%><font size="5px">You have not written any article.</font><br><br><br><br><%}
+   else{ for (int i=0; i<artFromDB.size(); i++){
     	art2=artFromDB.get(i).getId();
      %>
     <font size="5px"><a href="article.jsp?artic=<%=art2%>" >
     <%=artFromDB.get(i).getName()%>
     </a><br><br>
     </font>
-    <%}%>
+    <%}}%>
  <br><br>
  <form>
 <input type="button" value="Back" 

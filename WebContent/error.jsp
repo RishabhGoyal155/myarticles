@@ -26,8 +26,8 @@ function clearText(field)
 		<!-- menu starts -->
       		<div id="menu_left"></div>
              <ul>
-                  <li><a class="current" href="login.html">Login..</a></li>
-                  <li><a href="signup.html">Sign Up..</a></li>
+                  <li><a class="current" href="login.html">Login</a></li>
+                  <li><a href="signup.html">Sign Up</a></li>
             </ul>
       		
            </div> <!-- end of menu -->

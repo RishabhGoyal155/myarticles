@@ -35,20 +35,47 @@ public class ArticleDao {
           return status;
 	}
 
-	public static int delete(Article article) {
+	
+	
+	public static int Delete(String id[]) {
 		int status = 0;
 		String DeleteQuery="Delete from article where id =?";
 		String DeleteForeignKeys="Delete from author_article_category where article_id=?";
 		try {	
 		Connection con = JDBCConnect.getConnection();
 			PreparedStatement ps1,ps2;
-			
+			for(int i=0;i<id.length;i++){
 				ps1 = con.prepareStatement(DeleteQuery);
 				ps2 = con.prepareStatement(DeleteForeignKeys);
-			    ps1.setInt(1,article.getId());
-			    ps2.setInt(1, article.getId());
+			    ps1.setInt(1,Integer.parseInt(id[i]));
+			    ps2.setInt(1,Integer.parseInt(id[i]));
                 status = ps1.executeUpdate();
 				status = ps2.executeUpdate();
+			}
+			con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return status;
+	}
+/**\
+ * need to be updated
+ * @param id
+ * @return
+ */
+	public static int update(Article article) {
+		int status = 0;
+		String DeleteQuery="update article set name=?, content=?,date=? where id =?";
+		try {	
+		Connection con = JDBCConnect.getConnection();
+			PreparedStatement ps1;
+				ps1 = con.prepareStatement(DeleteQuery);
+				ps1.setString(1, article.getName());
+				ps1.setString(2,article.getContent());
+				ps1.setDate(3, (Date) article.getDate());
+				ps1.setInt(4, article.getId());
+			    status = ps1.executeUpdate();
 			con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -57,6 +84,7 @@ public class ArticleDao {
 		return status;
 	}
 
+	
 	private static void addForeignKeys(String[] categ,User user)
 	{
 		int articleId=0;

@@ -14,6 +14,10 @@ function clearText(field)
     if (field.defaultValue == field.value) field.value = '';
     else if (field.value == '') field.value = field.defaultValue;
 }
+function openPage(pageURL)
+{
+window.location.href = pageURL;
+}
 </script>
 
 </head>
@@ -26,8 +30,12 @@ function clearText(field)
    		<div id="menu">
 		<!-- menu starts -->
       		<div id="menu_left"></div>
-            <ul>
-                  <li><a href="logout.jsp">Logout..</a></li>
+            <ul><%if(user.getIsAdmin()){%>
+               <li><a class="current" href="welcomeAdmin.jsp"><%=user.getName()%> </a></li>
+               <%}else{%>
+                <li><a class="current" href="welcome.jsp"><%=user.getName()%> </a></li>
+              <%} %>
+                  <li><a href="logout.jsp">Log Out</a></li>
             </ul>    		
            </div> <!-- end of menu -->        
     </div>  <!-- end of header -->	
@@ -48,6 +56,7 @@ function clearText(field)
   </font><br><br><br>
 
 <form>
+<input type="button" value="Edit" onClick="openPage('editAuthor.jsp')">&emsp;
 <input type="button" value="Back" 
  onClick="history.go(-1);return true;"> 
 </form>

@@ -28,7 +28,7 @@ public class CategoryDao {
 
 	}
 
-	public static int delete(Category category) {
+	public static int Delete(String id[]) {
 		int status = 0;
 		String SQLQuery="delete from category where id=?";
 		String DeleteForeignKeys="Delete from author_article_category where category_id=?";
@@ -36,10 +36,12 @@ public class CategoryDao {
 			Connection con = JDBCConnect.getConnection();
 			PreparedStatement ps = con.prepareStatement(SQLQuery);
 			PreparedStatement ps1 = con.prepareStatement(DeleteForeignKeys);
-			ps.setInt(1, category.getId());
-			ps1.setInt(1, category.getId());
+			for(int i=0;i<id.length;i++){
+			ps.setInt(1, Integer.parseInt(id[i]));
+			ps1.setInt(1,Integer.parseInt(id[i]));
 			status = ps.executeUpdate();
 			status=ps1.executeUpdate();
+			}
 			con.close();
 		} catch (SQLException e) {
 		}

@@ -63,7 +63,27 @@ public class UserDAO {
 		return userFromDb;
 	}
 
-	public static int delete(User user) {
+	public static int update(User u) {
+		int status = 0;
+		String SQLQuery="update  user set name=?,email=?,about=? where id=?";
+		try {
+			Connection con = JDBCConnect.getConnection();
+			PreparedStatement ps = con
+					.prepareStatement(SQLQuery);
+			ps.setString(1, u.getName());
+			ps.setString(2, u.getEmail());
+			ps.setString(3, u.getAbout());
+			ps.setInt(4, u.getId());
+			
+			status = ps.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+		}
+
+		return status;
+	}
+	
+	public static int Delete(String id[]) {
 		String SQLQuery="delete from user where id=?";
 		String DeleteForeignKeys="Delete from author_article_category where user_id=?";
 		int status = 0;
@@ -71,10 +91,12 @@ public class UserDAO {
 			Connection con = JDBCConnect.getConnection();
 			PreparedStatement ps = con.prepareStatement(SQLQuery);
 			PreparedStatement ps1 = con.prepareStatement(DeleteForeignKeys);
-			ps.setInt(1, user.getId());
-			ps1.setInt(1, user.getId());
+			for(int i=0;i<id.length;i++){
+			ps.setInt(1, Integer.parseInt(id[i]));
+			ps1.setInt(1, Integer.parseInt(id[i]));
 			status = ps.executeUpdate();
 			status=ps1.executeUpdate();
+			}
 			con.close();
 		} catch (SQLException e) {
 		}
@@ -100,7 +122,7 @@ public class UserDAO {
 		}
 		return ls;
 	}
-}/*
- ls returns the list of objects of this class.
-*/
+}
+// ls returns the list of objects of this class.
+
 

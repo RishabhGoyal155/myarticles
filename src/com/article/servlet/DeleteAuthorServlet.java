@@ -37,31 +37,20 @@ public class DeleteAuthorServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
         User user= (User) session.getAttribute("user");
-		
-		
 		PrintWriter out = response.getWriter();
 		int status=0;
 		String id[]= request.getParameterValues("deleteId");
-		for(int i=0;i<id.length;i++){
-			int userId = Integer.parseInt(id[i]); 
-			User users = new User();
-			users.setId(userId);
-			status =UserDAO.delete(users); 
-		}
+		status =UserDAO.Delete(id); 
 		out.println("<script type=\"text/javascript\">");
 		
-		if (status > 0) {
 			out.println("alert('Author Deleted Successfully.');");
 			if(user.getIsAdmin()){
-				   out.println("location='welcomeAdmin.jsp';");}else{
+				   out.println("location='welcomeAdmin.jsp';");
+		    }else{
 			   out.println("location='welcome.jsp';");}
-			 out.println("</script>");
-		} else {
-			out.println("alert('Some error has occured!!');");
-			out.println("location='error.jsp';");}
+			 
 		    out.println("</script>");
-			}
-		
+	}
 	
 }
 	

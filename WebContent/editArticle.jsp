@@ -23,7 +23,9 @@ function clearText(field)
   
 <body>
 <%User user= (User) session.getAttribute("user");
-   if(user!=null){ %>
+String id=(String)session.getAttribute("articleId");
+   if(user!=null){ 
+   	   Article article=ArticleDao.validate(id);%>
  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
  
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -58,32 +60,20 @@ function clearText(field)
 	<div id="content">
     
     	<div id="column_w530">	
-            <div class="header_02">New Article</div>
-    <form action="AddArticleServlet" method="post" name="article" >
-               <table>
-            <tr height="50">
-      <td align="right">Category:</td>
-      <td align="left"><select id="category" multiple="multiple" name="category">
-        <% 
-    ArrayList<Category> CatFromDB = CategoryDao.display();
-    
-    for (int i=0; i<CatFromDB.size(); i++){
-     %><option value="<%=CatFromDB.get(i).getName()%>"><%= CatFromDB.get(i).getName() %></option>
-     <%}%>
-    </select></td>
-    </tr>
-    
+            <div class="header_02">Edit Article</div>
+    <form action="EditArticleServlet" method="post" name="article" >
+               <table> 
              <tr height="50">
       <td align="right">Heading:</td>
-      <td align="left"><input type="text" required="required" name="name" /></td>
+      <td align="left"><input type="text" value="<%=article.getName()%>" required="required" name="name" /></td>
     </tr>
     <tr height="50" >
       <td align="right" rowspan="10" >Content:</td>
-    <td><textarea name="content" required="required"  cols="23" rows="11"></textarea></td>
+    <td><textarea name="content" required="required"  cols="23" rows="11"><%=article.getContent() %></textarea></td>
     </tr>
   </table>
 <br>
-&emsp;&emsp;&emsp;&emsp; <button  type="submit">Submit  Article!</button>
+&emsp;&emsp;&emsp;&emsp; <button  type="submit">Save Changes!</button>
 </form>
 <form><br>
 &nbsp;&emsp;&emsp;&emsp;&emsp;

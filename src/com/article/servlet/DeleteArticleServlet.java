@@ -3,6 +3,7 @@ package com.article.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.article.dao.ArticleDao;
-import com.article.entity.Article;
 import com.article.entity.User;
 @WebServlet("/DeleteArticleServlet")
 public class DeleteArticleServlet extends HttpServlet {
@@ -30,28 +30,29 @@ public class DeleteArticleServlet extends HttpServlet {
 		
     		PrintWriter out = response.getWriter();
 	    	int status=0;
-		    Article article=null;
-		    
-		    String id[]= request.getParameterValues("deleteId");
-			for(int i=0;i<id.length;i++){
-				int articleId = Integer.parseInt(id[i]); 
-				article = new Article();
-				article.setId(articleId);
-				status =ArticleDao.delete(article); 
-			}
-			out.println("<script type=\"text/javascript\">");
+    if(request.getParameter("Delete") != null){
+	    	String id[]= request.getParameterValues("deleteId");
+		    status=ArticleDao.Delete(id);
+		    out.println("<script type=\"text/javascript\">");
 			
-		if (status > 0) {
+	
 			out.println("alert('Article Deleted Successfully.');");
 			if(user.getIsAdmin()){
 				   out.println("location='welcomeAdmin.jsp';");}else{
 			   out.println("location='welcome.jsp';");}
 			 out.println("</script>");
-		} else {
-			out.println("alert('No such Article found!!');");
-			out.println("location='error.jsp';");}
-		    out.println("</script>");
-			}
+			
+	}
+	   else if(request.getParameter("Edit")!=null){
+		   String id=request.getParameter("deleteId");
+		   session.setAttribute("articleId", id);
+		   RequestDispatcher rd;
+		   rd = request.getRequestDispatcher("editArticle.jsp");
+			rd.forward(request, response);
+		  
+	   }
 
 	}
+}
+	
 

@@ -34,7 +34,28 @@ function valthisform()
 	return false;
 
 }
- </script>       
+
+ function openPage(pageURL)
+ {
+ window.location.href = pageURL;
+ }
+ 
+ function validateEdit()
+ {
+ 	var chk = document.getElementsByName('deleteId')
+ 	var len = chk.length
+ 	var c=0
+ 	for(i=0;i<len;i++)
+ 	{
+ 	     if(chk[i].checked){
+ 	    c=c+1;
+ 	      }
+ 	}
+ 	if(c==1){return true;}
+ 	else{return false;}
+     
+ 	}
+</script>   
 </head>
 
 <body>
@@ -50,6 +71,7 @@ function valthisform()
 				<!-- menu starts -->
 				<div id="menu_left"></div>
 				<ul>
+				<li><a class="current" href="welcomeAdmin.jsp"><%=user.getName()%> </a></li>
 					<li><a href="logout.jsp">Logout..</a></li>
 				</ul>
 			</div>
@@ -67,7 +89,7 @@ function valthisform()
 		<div id="content">
 
 			<div id="column_w530">
-				<div class="header_02">Delete Author</div>
+				<div class="header_02">Authors</div>
 				<br><br>
 				<form action="DeleteAuthorServlet"  method="post" name="DeleteAuthor" id="DeleteAuthor">
 	       <br><br><br>
@@ -106,11 +128,13 @@ function valthisform()
 </tbody>
 </table>
 <br><br> <br><br>
-<input type="submit" value="Delete" onclick="return valthisform();" >
-				<br>
+<input type="button" value="Add New" name="Add new" onclick="openPage('signup.html')">
+&emsp;
+<input type="submit" value="Delete" onclick="return valthisform();" >&emsp;
+<input type="button" value="Back" 
+ onClick="history.go(-1);return true;">			
  			</form>
- 			<!-- "alert('Are you sure You want to delete these authors.')" -->
-				<div class="margin_bottom_20"></div>
+	<div class="margin_bottom_20"></div>
 				<div class="margin_bottom_20"></div>
 				<div class="cleaner"></div>
 			</div>
